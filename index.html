@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nisa Engineers Portfolio</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; transition: background 0.3s, color 0.3s; }
+    .dark-mode { background: #222; color: #ddd; }
+    header { background: #007bff; color: white; padding: 20px; text-align: center; }
+    nav { background: #333; padding: 10px; text-align: center; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; }
+    section { padding: 20px; max-width: 1200px; margin: auto; }
+    .category { margin-bottom: 30px; }
+    .project-card, .review-card { background: white; border: 1px solid #ddd; padding: 15px; margin: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s; }
+    .project-card:hover, .review-card:hover { transform: scale(1.02); }
+    .dark-mode .project-card, .dark-mode .review-card { background: #333; border-color: #444; }
+    footer { background: #333; color: white; text-align: center; padding: 10px; }
+    #theme-toggle { position: fixed; top: 10px; right: 10px; padding: 10px; background: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <button id="theme-toggle">Toggle Dark Mode</button>
+  <header>
+    <h1>Nisa Engineers</h1>
+    <p>Innovative AI and Engineering Solutions</p>
+  </header>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">What We Do</a>
+    <a href="#works">Prominent Works</a>
+    <a href="#reviews">Best Reviews</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Nisa Engineers is a premier AI and engineering consultancy firm specializing in cutting-edge solutions for businesses and individuals. Led by our Director and Lead Engineer, we boast a dedicated team of skilled professionals with expertise in artificial intelligence, machine learning, computer vision, natural language processing, and more. Our mission is to deliver innovative, reliable, and scalable technology solutions that drive real-world impact.</p>
+  </section>
+
+  <section id="services">
+    <h2>What We Do</h2>
+    <ul>
+      <li>AI and Machine Learning Development: Custom models for prediction, classification, automation, chatbots, recommendation systems, and predictive analytics.</li>
+      <li>Computer Vision and Image Processing: Object detection, image generation, facial recognition, aerial image analysis for agriculture, healthcare, and robotics.</li>
+      <li>Natural Language Processing (NLP) and Chatbots: Conversational agents, text-to-speech, sentiment analysis, multilingual transcription apps.</li>
+      <li>Embedded Systems and IoT: IoT-based crop disease detection, eye-controlled devices, real-time hardware integrations.</li>
+      <li>Web and App Development: User-friendly UI/UX for apps including fitness trackers, music editors, browser-based tools.</li>
+      <li>Consulting and Optimization: Expert advice on system architecture, debugging, model training, LangChain, GPT, WolframAlpha integration.</li>
+      <li>Data Science and Analytics: Data processing, GAN-based generation, reinforcement learning, financial modeling.</li>
+    </ul>
+  </section>
+
+  <section id="works">
+    <h2>Prominent Works</h2>
+    <div class="category">
+      <h3>AI and Machine Learning Development</h3>
+      <div class="project-card">Kadalu AI: AI Music Editing in Your Browser</div>
+      <div class="project-card">Near Human-Like ChatBot</div>
+      <div class="project-card">Farmers Chatbot RAG for Farmers</div>
+      <div class="project-card">AI Model Training for FinGPT</div>
+      <div class="project-card">Active Learning Project</div>
+      <div class="project-card">GPT + WolframAlpha with LangChain</div>
+    </div>
+    <div class="category">
+      <h3>Computer Vision and Image Processing</h3>
+      <div class="project-card">Rice Classification and Grain Count</div>
+      <div class="project-card">Pumpkin Flower Detection</div>
+      <div class="project-card">Potato and Tomato Disease Detection (IoT)</div>
+      <div class="project-card">Eye-Controlled Wheelchair</div>
+      <div class="project-card">StyleGAN, Pix2Pix GAN Developer</div>
+      <div class="project-card">Face Recognition Codebase</div>
+    </div>
+    <div class="category">
+      <h3>Natural Language Processing and Chatbots</h3>
+      <div class="project-card">Custom Multilingual Text-to-Speech</div>
+      <div class="project-card">Analysis of Bengali Folklore</div>
+      <div class="project-card">LLM Chatbot Creation for Monaarch</div>
+      <div class="project-card">LangChain with LLaMA2</div>
+      <div class="project-card">Books into Chat Bots</div>
+    </div>
+    <div class="category">
+      <h3>Embedded Systems and IoT</h3>
+      <div class="project-card">Embedded Systems Consultation</div>
+      <div class="project-card">Personal Trainer and Symptoms Checker Web App</div>
+    </div>
+    <div class="category">
+      <h3>Web and App Development</h3>
+      <div class="project-card">Website UI/UX Front End for Django Backend</div>
+      <div class="project-card">Design an AI Search Bar</div>
+      <div class="project-card">Recommender Script with Python</div>
+    </div>
+    <div class="category">
+      <h3>Consulting and Optimization</h3>
+      <div class="project-card">Scalable System Architecture Consultation</div>
+      <div class="project-card">Debugging Reinforcement Learning Model</div>
+      <div class="project-card">Perfect Hash Function Design</div>
+      <div class="project-card">Autoencoder Implementation</div>
+      <div class="project-card">OANDA Trading Bot</div>
+      <div class="project-card">GAN Model Training Assistance</div>
+    </div>
+  </section>
+
+    <section id="reviews">
+    <h2>Selected Best Reviews</h2>
+    <div class="review-card">5.0 (Oct 19, 2025): "An exceptional engineer with a remarkable personality, as always."</div>
+    <div class="review-card">5.0 (Sep 10, 2025): "Highly skilled and consistently reliable."</div>
+    <div class="review-card">5.0 (Nov 17, 2024): "Got fast delivery. Highly recommend."</div>
+    <div class="review-card">5.0 (Sep 27, 2024): "Great job, Jaman! Your knowledge of embedded systems, AI, and C++ really shines."</div>
+    <div class="review-card">5.0 (Jun 27, 2024): "Proficient in computer vision and research."</div>
+    <div class="review-card">5.0 (Feb 12, 2024): "Very fast and excellent work."</div>
+    <div class="review-card">5.0 (Aug 19, 2023): "Excellent Python, ML and AI programmer."</div>
+    <div class="review-card">5.0 (Aug 12, 2023): "Highly dependable and reliable... Top-notch communication."</div>
+    <div class="review-card">5.0 (Jul 18, 2023): "Very diligent in his work."</div>
+    <div class="review-card">5.0 (May 11, 2023): "Exceptional programmer with good interpersonal skills."</div>
+    <div class="review-card">5.0 (Apr 12, 2023): "Collaborative and reliable."</div>
+    <div class="review-card">5.0 (Apr 1, 2023): "Understood all requirements without much explanation."</div>
+    <div class="review-card">5.0 (Jan 22, 2023): "Good work, professional and on time."</div>
+    <div class="review-card">5.0 (Dec 9, 2022): "Completed job well before deadline."</div>
+    <div class="review-card">5.0 (Dec 6, 2022): "This guy is stellar!"</div>
+    <div class="review-card">5.0 (Sep 27, 2022): "A brilliant data scientist who solved an unsolvable problem."</div>
+    <div class="review-card">5.0 (Nov 13, 2022): "Very helpful and brilliant at the work provided."</div>
+    <div class="review-card">5.0 (Jun 13, 2022): "Fantastic coder and ML expert."</div>
+    <div class="review-card">5.0 (Mar 10, 2022): "Very responsive and knowledgeable."</div>
+    <div class="review-card">5.0 (Nov 9, 2021): "Work is good quality, even on complex topics."</div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: info@nisaengineers.com | Location: Dhaka, Bangladesh</p>
+  </section>
+
+  <footer>&copy; 2026 Nisa Engineers</footer>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      toggle.textContent = document.body.classList.contains('dark-mode') ? 'Toggle Light Mode' : 'Toggle Dark Mode';
+    });
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
