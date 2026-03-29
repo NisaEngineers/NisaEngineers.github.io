@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nisa Engineers — AI-Powered Software & Automation Startup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Modern tech palette */
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --primary-light: #818cf8;
+      --accent: #06b6d4;
+      --accent-bright: #22d3ee;
+      --success: #10b981;
+      --warning: #f59e0b;
+      
+      /* Neutrals */
+      --bg-dark: #0f172a;
+      --bg-darker: #020617;
+      --surface: #1e293b;
+      --surface-light: #334155;
+      --border: #334155;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      /* Spacing */
+      --section-padding: 7rem;
+      
+      /* Shadows */
+      --glow-primary: 0 0 40px rgba(99,102,241,0.3);
+      --glow-accent: 0 0 40px rgba(6,182,212,0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Animated background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════════════════════ */
+    
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(15,23,42,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(99,102,241,0.1);
+      transition: all 0.3s;
+    }
+
+    nav.scrolled {
+      background: rgba(15,23,42,0.95);
+      border-bottom-color: rgba(99,102,241,0.2);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.25rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent-bright));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-menu a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--text);
+    }
+
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.75rem 1.75rem;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+      transition: all 0.3s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--glow-primary);
+    }
+
+    .nav-cta::after {
+      display: none;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       HERO SECTION
+    ═══════════════════════════════════════════════════════════ */
+    
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 3rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(99,102,241,0.15), transparent 70%);
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(6,182,212,0.12), transparent 70%);
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: float 15s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(50px, 50px); }
+    }
+
+    .hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.3);
+      border-radius: 50px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--primary-light);
+      margin-bottom: 2rem;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    .hero-badge::before {
+      content: '●';
+      color: var(--success);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+      letter-spacing: -0.03em;
+      animation: fadeInUp 0.8s 0.2s ease both;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--primary-light), var(--accent-bright));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin-bottom: 3rem;
+      line-height: 1.8;
+      animation: fadeInUp 0.8s 0.4s ease both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.8s 0.6s ease both;
+    }
+
+    .btn {
+      padding: 1.1rem 2.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 4px 20px rgba(99,102,241,0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--glow-primary);
+    }
+
+    .btn-secondary {
+      background: rgba(99,102,241,0.1);
+      color: var(--primary-light);
+      border: 2px solid rgba(99,102,241,0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(99,102,241,0.2);
+      border-color: var(--primary-light);
+    }
+
+    .tech-stack {
+      margin-top: 5rem;
+      animation: fadeInUp 0.8s 0.8s ease both;
+    }
+
+    .tech-label {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-logos {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .tech-item {
+      font-family: 'Fira Code', monospace;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      opacity: 0.7;
+      transition: all 0.3s;
+    }
+
+    .tech-item:hover {
+      opacity: 1;
+      color: var(--primary-light);
+    }
+
+    /* New startup stats bar */
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(99,102,241,0.15);
+      animation: fadeInUp 0.8s 1s ease both;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent-bright));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SECTION STYLES
+    ═══════════════════════════════════════════════════════════ */
+    
+    section {
+      padding: var(--section-padding) 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 4rem;
+    }
+
+    .section-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--accent-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-description {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       AI SOLUTIONS (Featured)
+    ═══════════════════════════════════════════════════════════ */
+    
+    #ai-solutions {
+      background: linear-gradient(180deg, transparent, rgba(99,102,241,0.05));
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .ai-card {
+      background: rgba(30,41,59,0.5);
+      border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 16px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+
+    .ai-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .ai-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(99,102,241,0.5);
+      background: rgba(30,41,59,0.8);
+      box-shadow: 0 20px 60px rgba(99,102,241,0.2);
+    }
+
+    .ai-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .ai-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--glow-primary);
+    }
+
+    .ai-card h3 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .ai-card p {
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .ai-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .ai-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .ai-feature::before {
+      content: '→';
+      color: var(--accent-bright);
+      font-weight: 700;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       SOFTWARE SERVICES
+    ═══════════════════════════════════════════════════════════ */
+    
+    #software-services {
+      background: var(--bg-darker);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      transition: all 0.4s;
+      position: relative;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 1px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      background: rgba(30,41,59,0.8);
+    }
+
+    .service-card:hover::after {
+      opacity: 1;
+    }
+
+    .service-number {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--accent-bright);
+      margin-bottom: 1.25rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       INDUSTRIAL AUTOMATION
+    ═══════════════════════════════════════════════════════════ */
+    
+    #industrial {
+      background: linear-gradient(180deg, transparent, rgba(6,182,212,0.05));
+    }
+
+    .industrial-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .industrial-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .industrial-card:hover {
+      border-color: var(--accent);
+      background: rgba(6,182,212,0.05);
+      transform: translateY(-4px);
+    }
+
+    .industrial-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .industrial-card h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .industrial-card p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TECH STACK SHOWCASE
+    ═══════════════════════════════════════════════════════════ */
+    
+    #tech-stack {
+      background: var(--bg-darker);
+    }
+
+    .stack-categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .stack-category h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--primary-light);
+    }
+
+    .stack-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .stack-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      background: var(--surface);
+      border-radius: 8px;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+
+    .stack-item:hover {
+      border-color: var(--primary);
+      background: rgba(99,102,241,0.1);
+      transform: translateX(4px);
+    }
+
+    .stack-item::before {
+      content: '▸';
+      color: var(--accent-bright);
+      font-weight: 700;
+    }
+
+    .stack-item span {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PORTFOLIO
+    ═══════════════════════════════════════════════════════════ */
+    
+    #portfolio {
+      background: linear-gradient(180deg, transparent, rgba(99,102,241,0.03));
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .portfolio-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.4s;
+      cursor: pointer;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(99,102,241,0.5);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .portfolio-image {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: linear-gradient(135deg, var(--primary-dark), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(0,0,0,0.3));
+    }
+
+    .portfolio-info {
+      padding: 1.75rem;
+    }
+
+    .portfolio-tags {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .portfolio-tag {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.7rem;
+      padding: 0.35rem 0.75rem;
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.3);
+      border-radius: 4px;
+      color: var(--primary-light);
+    }
+
+    .portfolio-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .portfolio-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CONTACT CTA
+    ═══════════════════════════════════════════════════════════ */
+    
+    #contact {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      border-radius: 24px;
+      padding: 5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 50%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .contact-content {
+      position: relative;
+      z-index: 10;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .contact-content h2 {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .contact-content p {
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--primary-dark);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: white;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════ */
+    
+    footer {
+      background: var(--bg-darker);
+      padding: 4rem 3rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand h3 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary-light), var(--accent-bright));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: var(--surface);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .footer-section h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-section ul li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+
+    .footer-section ul li a:hover {
+      color: var(--primary-light);
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       ANIMATIONS
+    ═══════════════════════════════════════════════════════════ */
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════════ */
+    
+    @media (max-width: 1200px) {
+      .ai-grid,
+      .stack-categories {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid,
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .industrial-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --section-padding: 4rem;
+      }
+
+      .nav-container {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      section {
+        padding: var(--section-padding) 1.5rem;
+      }
+
+      .hero {
+        padding: 0 1.5rem;
+      }
+
+      .services-grid,
+      .portfolio-grid,
+      .industrial-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hero-buttons,
+      .contact-buttons {
+        flex-direction: column;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">NISA</a>
+      <ul class="nav-menu">
+        <li><a href="#ai-solutions">AI Solutions</a></li>
+        <li><a href="#software-services">Software</a></li>
+        <li><a href="#industrial">Automation</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact" class="nav-cta">Get Started →</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-badge">
+        <span>Now accepting new projects • Dhaka-based AI Startup</span>
+      </div>
+      <h1 class="hero-title">
+        Enterprise Software &<br>
+        <span class="gradient-text">AI-Powered Solutions</span>
+      </h1>
+      <p class="hero-description">
+        We build intelligent software systems that scale. From custom AI models and full-stack applications 
+        to industrial automation and enterprise platforms — transforming complex challenges into elegant, production-ready solutions. 
+        50+ successful projects delivered with 100% client satisfaction.
+      </p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary">
+          Start Your Project
+          <span>→</span>
+        </a>
+        <a href="#portfolio" class="btn btn-secondary">
+          View Case Studies
+        </a>
+      </div>
+
+      <!-- Startup achievement stats -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div>
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Oversease Projects Delivered</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div>
+            <div class="stat-number">200+</div>
+            <div class="stat-label">Local Projects Delivered</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div>
+            <div class="stat-number">100%</div>
+            <div class="stat-label">On-Time Delivery</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div>
+            <div class="stat-number">5★</div>
+            <div class="stat-label">Average Client Rating</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-stack">
+        <div class="tech-label">// Technologies We Master</div>
+        <div class="tech-logos">
+          <span class="tech-item">Python • TensorFlow • PyTorch</span>
+          <span class="tech-item">React • Node.js • Next.js • Django</span>
+          <span class="tech-item">AWS • Azure • GCP • Kubernetes</span>
+          <span class="tech-item">LLM Fine-tuning • LangChain • RAG</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI SOLUTIONS (FEATURED) -->
+  <section id="ai-solutions">
+    <div class="section-header reveal">
+      <div class="section-tag">// AI & Machine Learning</div>
+      <h2 class="section-title">Artificial Intelligence Solutions</h2>
+      <p class="section-description">
+        Custom AI systems built from the ground up by a verified Full-Stack AI Engineer. 
+        We don't just deploy models — we engineer intelligent, scalable solutions that deliver real business impact.
+      </p>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-card reveal">
+        <div class="ai-icon">🧠</div>
+        <h3>Custom AI Model Development</h3>
+        <p>
+          End-to-end machine learning pipelines from data engineering to production deployment. 
+          Specializing in computer vision, NLP, predictive analytics, and recommendation systems.
+        </p>
+        <div class="ai-features">
+          <div class="ai-feature">Deep Learning & Neural Networks</div>
+          <div class="ai-feature">LLM Fine-tuning & RAG Systems</div>
+          <div class="ai-feature">Model Optimization & MLOps</div>
+          <div class="ai-feature">Transfer Learning & Deployment</div>
+        </div>
+      </div>
+
+      <div class="ai-card reveal">
+        <div class="ai-icon">💬</div>
+        <h3>Conversational AI & Chatbots</h3>
+        <p>
+          Intelligent chatbots powered by LLMs, RAG systems, and custom NLP models. 
+          Context-aware, multi-turn conversations that feel human.
+        </p>
+        <div class="ai-features">
+          <div class="ai-feature">LLM Integration (OpenAI, Claude, LLaMA)</div>
+          <div class="ai-feature">Vector Search & Knowledge Bases</div>
+          <div class="ai-feature">Multi-language & Voice Support</div>
+          <div class="ai-feature">Enterprise-Grade Security</div>
+        </div>
+      </div>
+
+      <div class="ai-card reveal">
+        <div class="ai-icon">👁️</div>
+        <h3>Computer Vision Systems</h3>
+        <p>
+          Object detection, image classification, facial recognition, OCR, and video analytics. 
+          Real-time processing for industrial, agricultural, and security applications.
+        </p>
+        <div class="ai-features">
+          <div class="ai-feature">YOLO & OpenCV Pipelines</div>
+          <div class="ai-feature">Image Segmentation & Tracking</div>
+          <div class="ai-feature">IoT-Enabled Vision Systems</div>
+          <div class="ai-feature">Real-time Video Processing</div>
+        </div>
+      </div>
+
+      <div class="ai-card reveal">
+        <div class="ai-icon">📊</div>
+        <h3>Predictive Analytics & Data Science</h3>
+        <p>
+          Transform raw data into actionable intelligence. Forecasting, anomaly detection, 
+          customer behavior analysis, and business intelligence dashboards.
+        </p>
+        <div class="ai-features">
+          <div class="ai-feature">Time Series & Forecasting</div>
+          <div class="ai-feature">Anomaly Detection & Alerts</div>
+          <div class="ai-feature">Recommendation Engines</div>
+          <div class="ai-feature">Real-time BI Dashboards</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOFTWARE SERVICES -->
+  <section id="software-services">
+    <div class="section-header reveal">
+      <div class="section-tag">// Software Development</div>
+      <h2 class="section-title">Enterprise Software Solutions</h2>
+      <p class="section-description">
+        Full-stack development, enterprise applications, and cloud-native architectures 
+        built for scale, security, and performance. Delivered by an IBM-certified AI & Full-Stack Engineer.
+      </p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-number">01</div>
+        <h3>Full-Stack Web Development</h3>
+        <p>
+          Modern web applications with React, Next.js, Node.js, Django, and Flask. 
+          Responsive, fast, and built for conversion.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-number">02</div>
+        <h3>Mobile App Development</h3>
+        <p>
+          Native and cross-platform mobile apps (React Native, Flutter) with seamless 
+          backend integration and offline capabilities.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-number">03</div>
+        <h3>Enterprise ERP Systems</h3>
+        <p>
+          Custom ERP solutions for inventory, procurement, accounting, HR, and supply chain. 
+          Tailored to your business processes.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-number">04</div>
+        <h3>CRM & Sales Automation</h3>
+        <p>
+          Custom CRM platforms with pipeline management, lead scoring, email automation, 
+          and comprehensive analytics.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-number">05</div>
+        <h3>SaaS Platform Development</h3>
+        <p>
+          Multi-tenant SaaS applications with subscription billing, user management, 
+          analytics, and robust API infrastructure.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-number">06</div>
+        <h3>Database Design & Management</h3>
+        <p>
+          Scalable database architectures (PostgreSQL, MongoDB, Redis) with 
+          optimization, replication, and disaster recovery.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-number">07</div>
+        <h3>API Development & Integration</h3>
+        <p>
+          RESTful and GraphQL APIs, third-party integrations, microservices architecture, 
+          and API gateway management.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-number">08</div>
+        <h3>Cloud Solutions & DevOps</h3>
+        <p>
+          AWS, Azure, GCP deployment, containerization (Docker, Kubernetes), CI/CD pipelines, 
+          infrastructure as code.
+        </p>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-number">09</div>
+        <h3>Business Intelligence & Reporting</h3>
+        <p>
+          Custom dashboards, data visualization, ETL pipelines, and automated reporting 
+          systems for data-driven decisions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIAL AUTOMATION -->
+  <section id="industrial">
+    <div class="section-header reveal">
+      <div class="section-tag">// Industrial Electronics & Automation</div>
+      <h2 class="section-title">Smart Industrial Systems</h2>
+      <p class="section-description">
+        Hardware meets software. IoT, robotics, PLC programming, and intelligent 
+        automation for Industry 4.0 — powered by our dual expertise in Computer & Mechanical Engineering.
+      </p>
+    </div>
+    <div class="industrial-grid">
+      <div class="industrial-card reveal">
+        <div class="industrial-icon">⚙️</div>
+        <h4>PLC Programming</h4>
+        <p>Siemens, Allen-Bradley, Mitsubishi PLC programming for automated manufacturing</p>
+      </div>
+
+      <div class="industrial-card reveal">
+        <div class="industrial-icon">📡</div>
+        <h4>Industrial IoT</h4>
+        <p>Sensor networks, edge computing, real-time monitoring and predictive maintenance</p>
+      </div>
+
+      <div class="industrial-card reveal">
+        <div class="industrial-icon">🤖</div>
+        <h4>AI-Powered Robotics</h4>
+        <p>Computer vision for robotic automation, quality control, and intelligent pick-and-place</p>
+      </div>
+
+      <div class="industrial-card reveal">
+        <div class="industrial-icon">🖥️</div>
+        <h4>SCADA Systems</h4>
+        <p>Supervisory control systems for industrial processes with real-time dashboards</p>
+      </div>
+
+      <div class="industrial-card reveal">
+        <div class="industrial-icon">🔌</div>
+        <h4>Embedded Systems</h4>
+        <p>Arduino, Raspberry Pi, ESP32 development for custom hardware solutions</p>
+      </div>
+
+      <div class="industrial-card reveal">
+        <div class="industrial-icon">🛡️</div>
+        <h4>Smart Security</h4>
+        <p>AI-powered surveillance, access control, intrusion detection systems</p>
+      </div>
+
+      <div class="industrial-card reveal">
+        <div class="industrial-icon">🌾</div>
+        <h4>AgriTech Solutions</h4>
+        <p>IoT crop monitoring, disease detection, automated irrigation systems</p>
+      </div>
+
+      <div class="industrial-card reveal">
+        <div class="industrial-icon">📊</div>
+        <h4>Process Automation</h4>
+        <p>End-to-end workflow automation, RPA, and intelligent process optimization</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section id="tech-stack">
+    <div class="section-header reveal">
+      <div class="section-tag">// Our Arsenal</div>
+      <h2 class="section-title">Technologies We Master</h2>
+      <p class="section-description">
+        Best-in-class tools and frameworks for building production-grade AI and software systems
+      </p>
+    </div>
+    <div class="stack-categories">
+      <div class="reveal">
+        <h3>AI & Machine Learning</h3>
+        <div class="stack-list">
+          <div class="stack-item"><span>TensorFlow, Keras & PyTorch</span></div>
+          <div class="stack-item"><span>Hugging Face • LangChain • LlamaIndex</span></div>
+          <div class="stack-item"><span>Computer Vision (YOLO, OpenCV)</span></div>
+          <div class="stack-item"><span>LLM Fine-tuning & RAG Systems</span></div>
+          <div class="stack-item"><span>Voice Cloning • TTS/STT • Audio AI</span></div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3>Backend & APIs</h3>
+        <div class="stack-list">
+          <div class="stack-item"><span>Python (Django, Flask, FastAPI)</span></div>
+          <div class="stack-item"><span>Node.js • Express • GraphQL</span></div>
+          <div class="stack-item"><span>PostgreSQL • MongoDB • Redis</span></div>
+          <div class="stack-item"><span>Docker • Kubernetes • CI/CD</span></div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <h3>Frontend & Mobile</h3>
+        <div class="stack-list">
+          <div class="stack-item"><span>React • Next.js • TypeScript</span></div>
+          <div class="stack-item"><span>React Native • Flutter</span></div>
+          <div class="stack-item"><span>Tailwind • Real-time WebSockets</span></div>
+          <div class="stack-item"><span>PWA & SaaS Dashboards</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="section-header reveal">
+      <div class="section-tag">// Featured Work</div>
+      <h2 class="section-title">Case Studies</h2>
+      <p class="section-description">
+        Real projects. Real impact. From AI music tools to industrial automation — delivered for global clients.
+      </p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-card reveal">
+        <div class="portfolio-image">🎵</div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="portfolio-tag">AI</span>
+            <span class="portfolio-tag">Web</span>
+          </div>
+          <h3>Monaarch: AI Music Editing in Your Browser</h3>
+          <p>Real-time AI music editor with voice cloning, TTS/STT integration, and ML-powered recommendations</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal">
+        <div class="portfolio-image">💬</div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="portfolio-tag">NLP</span>
+            <span class="portfolio-tag">RAG</span>
+          </div>
+          <h3>Enterprise RAG Chatbot</h3>
+          <p>LLM-powered knowledge base with vector search for agricultural advisory services</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal">
+        <div class="portfolio-image">📊</div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="portfolio-tag">ERP</span>
+            <span class="portfolio-tag">SaaS</span>
+          </div>
+          <h3>Custom ERP Platform</h3>
+          <p>Multi-tenant ERP for manufacturing with inventory, procurement, and financial modules</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal">
+        <div class="portfolio-image">🤖</div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="portfolio-tag">IoT</span>
+            <span class="portfolio-tag">CV</span>
+          </div>
+          <h3>IoT Crop Disease Detection</h3>
+          <p>Real-time plant disease detection using computer vision and IoT sensors</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal">
+        <div class="portfolio-image">⚡</div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="portfolio-tag">PLC</span>
+            <span class="portfolio-tag">SCADA</span>
+          </div>
+          <h3>Factory Automation System</h3>
+          <p>Complete PLC-based manufacturing line with SCADA monitoring and predictive maintenance</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card reveal">
+        <div class="portfolio-image">💼</div>
+        <div class="portfolio-info">
+          <div class="portfolio-tags">
+            <span class="portfolio-tag">CRM</span>
+            <span class="portfolio-tag">Full-Stack</span>
+          </div>
+          <h3>Sales Pipeline CRM</h3>
+          <p>Custom CRM with AI-powered lead scoring, email automation, and analytics dashboard</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <section id="contact">
+    <div class="contact-content">
+      <h2>Ready to Build Something Extraordinary?</h2>
+      <p>
+        Let's discuss your project. Whether you need AI integration, custom software, 
+        voice cloning, industrial automation, or a full SaaS platform — our verified AI startup delivers.
+      </p>
+      <div class="contact-buttons">
+        <a href="mailto:onirban.csebuet@gmail.com" class="btn btn-white">
+          Schedule a Call
+          <span>→</span>
+        </a>
+        <a href="mailto:onirban.csebuet@gmail.com" class="btn btn-outline">
+          Email Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>NISA</h3>
+        <p>
+          Dhaka-based AI software startup engineering the future. 50+ projects delivered. 
+          IBM-certified AI Engineering + Full-Stack expertise in LLMs, computer vision, 
+          embedded systems, and industrial automation.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-link">🔗</a>
+          <a href="#" class="social-link">📧</a>
+          <a href="#" class="social-link">💼</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#ai-solutions">AI Development</a></li>
+          <li><a href="#software-services">Software Engineering</a></li>
+          <li><a href="#industrial">Industrial Automation</a></li>
+          <li><a href="#tech-stack">Technology Stack</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#tech-stack">Technologies</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="email">salest@nisa.ai</a></li>
+          <li><a href="#">Dhaka, Bangladesh</a></li>
+          <li><a href="#">Response within 24h</a></li>
+          <li><a href="#">Open to Contract-to-Hire</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Nisa Engineers. Powering the intelligent revolution — from Dhaka to the world.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky nav on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll reveal animation
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    reveals.forEach(element => {
+      revealObserver.observe(element);
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
