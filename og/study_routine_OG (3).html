@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Written Syllabus OG — Study Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f0e;--surface:#161a18;--surface2:#1e2421;--border:#2a3330;
+  --accent:#4ade80;--accent2:#86efac;--amber:#fbbf24;--coral:#f87171;
+  --purple:#a78bfa;--pink:#f472b6;--blue:#60a5fa;--text:#e8f0ec;--muted:#6b8278;
+  --fh:'Syne',sans-serif;--fm:'DM Mono',monospace;
+  --r:10px;--tap:44px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:var(--fm);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.5}
+
+.app{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:1rem}
+
+/* HEADER */
+.header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;gap:0.75rem;flex-wrap:wrap}
+.header-left h1{font-family:var(--fh);font-size:clamp(1.3rem,5vw,2rem);font-weight:800;letter-spacing:-0.02em;color:var(--text);line-height:1.1}
+.header-left h1 span{color:var(--accent)}
+.header-left p{font-size:0.65rem;color:var(--muted);margin-top:3px;letter-spacing:0.05em;text-transform:uppercase}
+.live-clock{text-align:right;flex-shrink:0}
+.live-clock .time{font-family:var(--fh);font-size:clamp(1.4rem,6vw,2.5rem);font-weight:700;color:var(--accent);letter-spacing:-0.03em;line-height:1}
+.live-clock .date{font-size:0.62rem;color:var(--muted);margin-top:2px;letter-spacing:0.04em}
+
+/* DEADLINE BANNER */
+.deadline-bar{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--coral);border-radius:var(--r);padding:10px 14px;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.deadline-bar .label{font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+.deadline-bar .countdown{font-family:var(--fh);font-size:clamp(0.9rem,3vw,1.1rem);font-weight:700;color:var(--coral)}
+
+/* TABS */
+.tabs{display:flex;gap:3px;margin-bottom:1rem;background:var(--surface);border-radius:var(--r);padding:3px;border:1px solid var(--border)}
+.tab{flex:1;padding:9px 2px;text-align:center;font-size:clamp(0.6rem,2.5vw,0.72rem);letter-spacing:0.04em;text-transform:uppercase;border-radius:8px;cursor:pointer;color:var(--muted);transition:all 0.2s;border:none;background:none;font-family:var(--fm);min-height:var(--tap)}
+.tab.active{background:var(--accent);color:#0d1a12;font-weight:500}
+.tab:active{opacity:0.8}
+
+/* PANEL */
+.panel{display:none}.panel.active{display:block}
+
+/* SCHEDULE */
+.day-section{margin-bottom:1.25rem}
+.day-head-wrap{margin-bottom:8px}
+.day-title{font-family:var(--fh);font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px}
+.day-title span{display:inline-block;height:1px;flex:1;background:var(--border)}
+.day-badge{display:block;font-size:0.6rem;color:var(--muted);margin-top:4px;padding-left:2px;letter-spacing:0.04em}
+
+.slot{display:flex;align-items:stretch;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:4px;transition:border-color 0.2s}
+.slot:active{opacity:0.85}
+
+/* Mobile: stacked layout */
+.slot-time{font-size:0.62rem;min-width:0;width:88px;flex-shrink:0;padding:8px 8px;background:var(--surface2);display:flex;flex-direction:column;justify-content:center;color:var(--muted);border-right:1px solid var(--border);line-height:1.4}
+.slot-time .dur{font-size:0.55rem;color:#3d5249;margin-top:2px}
+.slot-body{flex:1;padding:8px 10px;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0}
+.slot-title{font-size:0.76rem;font-weight:500;font-family:var(--fh);line-height:1.3}
+.slot-detail{font-size:0.6rem;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.slot-mark{width:40px;min-width:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;background:var(--surface2);border-left:1px solid var(--border)}
+
+.c-study .slot-body{border-left:2px solid var(--accent)}.c-study .slot-title{color:var(--accent2)}
+.c-math .slot-body{border-left:2px solid var(--amber)}.c-math .slot-title{color:var(--amber)}
+.c-revise .slot-body{border-left:2px solid var(--purple)}.c-revise .slot-title{color:var(--purple)}
+.c-code .slot-body{border-left:2px solid var(--pink)}.c-code .slot-title{color:var(--pink)}
+.c-sleep .slot-body{border-left:2px solid var(--blue)}.c-sleep .slot-title{color:var(--blue)}
+.c-break .slot-body{border-left:2px solid var(--border)}.c-break .slot-title{color:var(--muted)}
+.c-block .slot-body{border-left:2px solid var(--coral)}.c-block .slot-title{color:var(--coral)}
+.slot.done{opacity:0.4}
+
+/* STOPWATCH */
+.sw-wrap{display:flex;flex-direction:column;align-items:center;gap:1rem;padding:0.5rem 0}
+.sw-display{font-family:var(--fh);font-size:clamp(2.8rem,14vw,5.5rem);font-weight:800;letter-spacing:-0.04em;color:var(--accent);text-align:center;line-height:1;padding:1.25rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;width:100%}
+.sw-ms{font-size:0.35em;color:var(--muted);vertical-align:middle}
+.sw-label{font-size:0.65rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:4px}
+.sw-btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:100%}
+.btn{font-family:var(--fm);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;padding:0 20px;height:var(--tap);border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;transition:all 0.15s;flex:1;min-width:80px;max-width:140px}
+.btn:active{opacity:0.75;transform:scale(0.97)}
+.btn.primary{background:var(--accent);color:#0d1a12;border-color:var(--accent);font-weight:500}
+.btn.danger{border-color:var(--coral);color:var(--coral)}
+
+.session-picker{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:0.875rem}
+.sp-label{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.sp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:5px}
+.sp-item{padding:8px 10px;border-radius:6px;border:1px solid var(--border);cursor:pointer;transition:all 0.15s;font-size:0.68rem;min-height:var(--tap);display:flex;flex-direction:column;justify-content:center}
+.sp-item.selected{border-color:var(--accent);background:var(--surface2)}
+.sp-item .sp-name{font-weight:500;color:var(--text);line-height:1.3}
+.sp-item .sp-dur{font-size:0.58rem;color:var(--muted);margin-top:2px}
+
+.laps{width:100%;max-height:200px;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--r)}
+.laps-head{padding:8px 12px;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface)}
+.lap-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;font-size:0.7rem;border-bottom:1px solid var(--border)}
+.lap-row:last-child{border-bottom:none}
+.lap-n{color:var(--muted)}
+.lap-t{color:var(--accent);font-weight:500}
+
+/* TIMER */
+.timer-wrap{display:flex;flex-direction:column;align-items:center;gap:1rem;padding:0.5rem 0}
+.timer-display{font-family:var(--fh);font-size:clamp(2.8rem,14vw,5.5rem);font-weight:800;letter-spacing:-0.04em;color:var(--amber);text-align:center;line-height:1;padding:1.25rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;width:100%}
+.timer-display.urgent{color:var(--coral)}
+.progress-ring{width:100%;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;margin-top:-0.5rem}
+.progress-fill{height:100%;background:var(--amber);border-radius:3px;transition:width 1s linear}
+.timer-presets{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;width:100%}
+.preset-btn{padding:0 8px;height:var(--tap);border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;font-family:var(--fm);font-size:0.72rem;transition:all 0.15s;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.preset-btn span{font-size:0.55rem;color:var(--muted)}
+.preset-btn:active{opacity:0.75}
+.custom-time{display:flex;gap:8px;align-items:flex-end;width:100%}
+.custom-time>div{display:flex;flex-direction:column;gap:4px;flex:1}
+.custom-time label{font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
+.custom-time input{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:0 12px;height:var(--tap);color:var(--text);font-family:var(--fm);font-size:0.85rem;text-align:center;width:100%}
+.custom-time input:focus{outline:none;border-color:var(--amber)}
+.custom-time .btn{flex:none;width:64px;max-width:64px}
+
+/* PROGRESS */
+.progress-wrap{padding:0.25rem 0}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-bottom:1rem}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:11px 13px}
+.stat-label{font-size:0.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px}
+.stat-val{font-family:var(--fh);font-size:1.4rem;font-weight:700;color:var(--accent)}
+.subj-grid{display:flex;flex-direction:column;gap:5px}
+.subj-row{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.subj-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.subj-name{font-size:0.74rem;color:var(--text);flex:1;min-width:0}
+.subj-marks{font-size:0.65rem;color:var(--muted);white-space:nowrap}
+.subj-bottom{display:flex;align-items:center;gap:8px}
+.subj-bar-wrap{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.subj-bar{height:100%;border-radius:3px;transition:width 0.5s ease}
+.subject-done-btn{font-size:0.62rem;padding:0 10px;height:28px;border-radius:4px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;font-family:var(--fm);transition:all 0.15s;white-space:nowrap;flex-shrink:0}
+.subject-done-btn.done{border-color:var(--accent);color:var(--accent);background:#4ade8015}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--surface)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.45}}
+.pulse{animation:pulse 2s infinite}
+
+.notif{position:fixed;bottom:16px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--surface);border:1px solid var(--accent);border-radius:var(--r);padding:10px 18px;font-size:0.72rem;color:var(--accent);z-index:999;opacity:0;transition:all 0.3s;white-space:nowrap}
+.notif.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* DESKTOP enhancements */
+@media(min-width:520px){
+  .app{padding:1.5rem}
+  .slot-time{width:110px;font-size:0.65rem}
+  .slot-time .dur{font-size:0.58rem}
+  .slot-title{font-size:0.8rem}
+  .slot-detail{font-size:0.63rem;-webkit-line-clamp:3}
+  .stat-grid{grid-template-columns:repeat(4,1fr)}
+  .subj-row{flex-direction:row;align-items:center;gap:10px}
+  .subj-top{flex:1}
+  .subj-name{font-size:0.78rem}
+  .subj-bottom{flex:1}
+  .timer-presets{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
+  .day-badge{display:inline;margin-left:6px;font-size:0.63rem}
+  .day-title{font-size:0.75rem}
+}
+</style>
+</head>
+<body>
+<div class="notif" id="notif"></div>
+<div class="app">
+
+  <div class="header">
+    <div class="header-left">
+      <h1>Study Planner <span>OG</span></h1>
+      <p>Written Syllabus · Jun 3 → Exam Sat Jun 7 · 2 PM</p>
+    </div>
+    <div class="live-clock">
+      <div class="time" id="liveClock">00:00:00</div>
+      <div class="date" id="liveDate">—</div>
+    </div>
+  </div>
+
+  <div class="deadline-bar">
+    <div>
+      <div class="label">Time until exam</div>
+      <div class="countdown pulse" id="deadlineCountdown">calculating...</div>
+    </div>
+    <div style="text-align:right">
+      <div class="label">Exam</div>
+      <div style="font-size:0.8rem;color:var(--text)">Sat Jun 7 · 2:00 PM</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(this,'schedule')">Schedule</button>
+    <button class="tab" onclick="switchTab(this,'stopwatch')">Stopwatch</button>
+    <button class="tab" onclick="switchTab(this,'timer')">Timer</button>
+    <button class="tab" onclick="switchTab(this,'progress')">Progress</button>
+  </div>
+
+  <div class="panel active" id="panel-schedule"><div id="scheduleContainer"></div></div>
+
+  <div class="panel" id="panel-stopwatch">
+    <div class="sw-wrap">
+      <div class="sw-display">
+        <div id="swDisplay">00:00<span class="sw-ms">.00</span></div>
+        <div class="sw-label" id="swSessionLabel">no session selected</div>
+      </div>
+      <div class="sw-btns">
+        <button class="btn primary" id="swStartBtn" onclick="swToggle()">Start</button>
+        <button class="btn" onclick="swLap()">Lap</button>
+        <button class="btn danger" onclick="swReset()">Reset</button>
+      </div>
+      <div class="session-picker">
+        <div class="sp-label">Select session to track</div>
+        <div class="sp-grid" id="spGrid"></div>
+      </div>
+      <div class="laps" id="lapsBox" style="display:none">
+        <div class="laps-head">Laps</div>
+        <div id="lapsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-timer">
+    <div class="timer-wrap">
+      <div class="timer-display" id="timerDisplay">25:00</div>
+      <div class="progress-ring"><div class="progress-fill" id="timerProgress" style="width:100%"></div></div>
+      <div class="timer-presets">
+        <button class="preset-btn" onclick="setTimer(25)">25 min<span>pomodoro</span></button>
+        <button class="preset-btn" onclick="setTimer(45)">45 min<span>deep study</span></button>
+        <button class="preset-btn" onclick="setTimer(60)">60 min<span>session</span></button>
+        <button class="preset-btn" onclick="setTimer(90)">90 min<span>long block</span></button>
+        <button class="preset-btn" onclick="setTimer(5)">5 min<span>break</span></button>
+        <button class="preset-btn" onclick="setTimer(10)">10 min<span>break</span></button>
+      </div>
+      <div class="custom-time">
+        <div><label>Custom minutes</label><input type="number" id="customMin" min="1" max="480" placeholder="e.g. 120" inputmode="numeric"></div>
+        <button class="btn" onclick="setCustomTimer()">Set</button>
+      </div>
+      <div class="sw-btns">
+        <button class="btn primary" id="timerStartBtn" onclick="timerToggle()">Start</button>
+        <button class="btn danger" onclick="timerReset()">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-progress">
+    <div class="progress-wrap">
+      <div class="stat-grid" id="statGrid"></div>
+      <div class="subj-grid" id="subjGrid"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SCHEDULE = [
+  {day:"Day 1 — Tue, Jun 3", badge:"Starts 2:30 AM · Sleep from 12 PM", slots:[
+    {time:"2:30–5:00 AM",dur:"2.5h",type:"study",title:"Focus Writing in English",detail:"Study structure, paragraph writing, essay types · Practice 1 full essay"},
+    {time:"5:00–6:30 AM",dur:"1.5h",type:"study",title:"Focus Writing in Bangla",detail:"Bangla essay/report styles · Write 1 practice piece"},
+    {time:"6:30–7:00 AM",dur:"30min",type:"break",title:"Break + meal / Fajr",detail:""},
+    {time:"7:00–9:00 AM",dur:"2h",type:"math",title:"Math — Lecture walkthrough",detail:"Record voice/note solutions · Cover 5–8 problems with full steps"},
+    {time:"9:00–10:30 AM",dur:"1.5h",type:"study",title:"General Knowledge sprint",detail:"Current affairs, Bangladesh, international orgs, science facts"},
+    {time:"10:30–11:30 AM",dur:"1h",type:"study",title:"Comprehension",detail:"2 timed comprehension sets · answer questions carefully"},
+    {time:"11:30 AM–12 PM",dur:"30min",type:"break",title:"Wind down · light meal",detail:"Prep for sleep"},
+    {time:"12:00–7:00 PM",dur:"7h sleep",type:"sleep",title:"Sleep",detail:"Full 7h · adjust ±1h for 6–8h"},
+    {time:"7:00–7:30 PM",dur:"30min",type:"break",title:"Wake up · eat · freshen",detail:""},
+    {time:"7:30–9:00 PM",dur:"1.5h",type:"study",title:"Translation — Bangla → English",detail:"3–4 paragraphs · compare with model answers"},
+    {time:"9:00–10:30 PM",dur:"1.5h",type:"study",title:"Translation — English → Bangla",detail:"3–4 paragraphs · idioms and formal tone"},
+    {time:"10:30–11:00 PM",dur:"30min",type:"break",title:"Dinner break",detail:""},
+    {time:"11:00 PM–12 AM",dur:"1h",type:"code",title:"Coding — hobby hour",detail:"Build/explore anything fun — guilt-free recreation"},
+    {time:"12:00–2:00 AM",dur:"2h",type:"revise",title:"Summary Writing + Day 1 Revision",detail:"2 practice summaries · flashcard review of all topics"},
+  ]},
+  {day:"Day 2 — Wed, Jun 4", badge:"Wakes ~2 AM · Sleep from 12 PM", slots:[
+    {time:"2:00–2:30 AM",dur:"30min",type:"break",title:"Ease in · water · light snack",detail:"Low-intensity transition"},
+    {time:"2:30–5:00 AM",dur:"2.5h",type:"math",title:"Math — deep practice + lecture record",detail:"Record solutions aloud · 8–10 problems · algebra, arithmetic, percentage, ratio"},
+    {time:"5:00–7:00 AM",dur:"2h",type:"study",title:"General Knowledge — deep dive",detail:"History of Bangladesh, constitution, science & tech, geography"},
+    {time:"7:00–7:30 AM",dur:"30min",type:"break",title:"Break / Fajr / light meal",detail:""},
+    {time:"7:30–9:30 AM",dur:"2h",type:"study",title:"Focus Writing in English — advanced",detail:"Timed writing (35-mark) · paragraph cohesion, arguments"},
+    {time:"9:30–11:00 AM",dur:"1.5h",type:"study",title:"Focus Writing in Bangla — practice",detail:"1 full timed piece · grammar, structure, format"},
+    {time:"11:00–11:30 AM",dur:"30min",type:"break",title:"Wind down · light meal",detail:""},
+    {time:"11:30 AM–12 PM",dur:"30min",type:"revise",title:"Quick flash review before sleep",detail:"5 min per subject · reinforce key points"},
+    {time:"12:00–7:00 PM",dur:"7h sleep",type:"sleep",title:"Sleep",detail:"Consistent 12PM anchor · adjust ±1h"},
+    {time:"7:00–7:30 PM",dur:"30min",type:"break",title:"Wake up · eat · freshen",detail:""},
+    {time:"7:30–9:30 PM",dur:"2h",type:"study",title:"Both Translations — full practice set",detail:"1h each direction · formal text types · self-mark"},
+    {time:"9:30–10:30 PM",dur:"1h",type:"code",title:"Coding — hobby hour",detail:"Your fun project — no study guilt"},
+    {time:"10:30 PM–12 AM",dur:"1.5h",type:"revise",title:"Summary Writing + Day 1&2 Revision",detail:"2 summaries · review all notes · flag weak areas"},
+  ]},
+  {day:"Day 3 — Thu, Jun 5", badge:"Fully available · Sleep from 12 PM", slots:[
+    {time:"12:00–2:00 AM",dur:"2h",type:"revise",title:"Carry-over revision + weak spots",detail:"Re-attempt flagged problems from Days 1&2 · fill gaps"},
+    {time:"2:00–2:30 AM",dur:"30min",type:"break",title:"Break · snack",detail:""},
+    {time:"2:30–5:00 AM",dur:"2.5h",type:"math",title:"Math — final lecture record session",detail:"Record 8–10 problems aloud · cover untouched types"},
+    {time:"5:00–7:00 AM",dur:"2h",type:"study",title:"GK — power blitz",detail:"Current affairs, int'l orgs, science · flashcard run"},
+    {time:"7:00–7:30 AM",dur:"30min",type:"break",title:"Break / Fajr / meal",detail:""},
+    {time:"7:30–9:30 AM",dur:"2h",type:"study",title:"Comprehension + Translation drill",detail:"2 comprehension sets + 2 translations each direction · timed"},
+    {time:"9:30–11:00 AM",dur:"1.5h",type:"study",title:"Summary Writing — intensive",detail:"3 full summaries under timed conditions · self-mark each"},
+    {time:"11:00–11:30 AM",dur:"30min",type:"break",title:"Wind down · light meal",detail:""},
+    {time:"11:30 AM–12 PM",dur:"30min",type:"revise",title:"Pre-sleep flash review",detail:"5 min per subject · reinforce formulas and GK facts"},
+    {time:"12:00–7:00 PM",dur:"7h sleep",type:"sleep",title:"Sleep",detail:"Same 12PM anchor · full rest before crunch day"},
+    {time:"7:00–7:30 PM",dur:"30min",type:"break",title:"Wake up · eat · freshen",detail:""},
+    {time:"7:30–9:30 PM",dur:"2h",type:"study",title:"English + Bangla Writing — final polish",detail:"1h each · intro/conclusion quality and time management"},
+    {time:"9:30–10:30 PM",dur:"1h",type:"code",title:"Coding — hobby hour",detail:"Decompress · reward yourself for a full day"},
+    {time:"10:30 PM–1:00 AM",dur:"2.5h",type:"revise",title:"Comprehensive revision — all 8 subjects",detail:"Sweep every subject · note cards · re-read today's summaries"},
+  ]},
+  {day:"Day 4 — Fri, Jun 6", badge:"⚠ Blocked 7AM–1PM · Sleep from 3 AM", slots:[
+    {time:"1:00–3:00 AM",dur:"2h",type:"revise",title:"Final deep revision — Math + GK",detail:"Last chance to nail formulas · GK rapid flashcard sweep"},
+    {time:"3:00–9:00 AM",dur:"6h sleep",type:"sleep",title:"Sleep",detail:"Block starts at 7 — you're already asleep, no conflict"},
+    {time:"7AM–1PM",dur:"BLOCKED",type:"block",title:"Unavailable (morning)",detail:"Sleep covers most of this — no study needed"},
+    {time:"1:00–1:30 PM",dur:"30min",type:"break",title:"Wake up · eat · freshen",detail:""},
+    {time:"1:30–3:30 PM",dur:"2h",type:"study",title:"Translation — final speed run",detail:"3 each direction · timed · self-mark immediately"},
+    {time:"3:30–5:00 PM",dur:"1.5h",type:"study",title:"Comprehension + Summary — last practice",detail:"1 comprehension + 2 summaries · exam simulation pace"},
+    {time:"5:00–5:30 PM",dur:"30min",type:"break",title:"Break + meal",detail:""},
+    {time:"5:30–7:00 PM",dur:"1.5h",type:"revise",title:"Full subject sweep — all notes",detail:"Light read-through · no new material"},
+    {time:"7:00–8:00 PM",dur:"1h",type:"code",title:"Coding — hobby hour",detail:"Calm the nerves · reward the grind"},
+    {time:"8:00–9:30 PM",dur:"1.5h",type:"revise",title:"Exam-eve final revision",detail:"Key facts · GK bullets · Math formulas · writing tips"},
+    {time:"9:30–10:00 PM",dur:"30min",type:"break",title:"Dinner · wind down",detail:"No heavy screens after this"},
+    {time:"10 PM–4 AM",dur:"6h sleep",type:"sleep",title:"Sleep — critical pre-exam rest",detail:"Exam at 2PM tomorrow · DO NOT skip this"},
+  ]},
+  {day:"Day 5 — Sat, Jun 7", badge:"🎯 EXAM DAY — 2:00 PM", slots:[
+    {time:"4:00–10:00 AM",dur:"6h",type:"sleep",title:"Sleep (if not already)",detail:"Aim for 6–8h total · adjust if earlier"},
+    {time:"10:00–11:00 AM",dur:"1h",type:"revise",title:"Last-minute revision",detail:"GK flashcards, formulas, writing tips — light scan only · no new material"},
+    {time:"11 AM–12 PM",dur:"1h",type:"break",title:"Get ready · eat well · relax",detail:"Trust the prep — no heavy studying now"},
+    {time:"12:00–1:00 PM",dur:"1h",type:"revise",title:"Optional — final skim",detail:"Only if anxious · 10 min per subject max · close notes by 1 PM"},
+    {time:"1:00–2:00 PM",dur:"1h",type:"break",title:"Travel + settle in",detail:"Arrive early · water · breathe"},
+    {time:"2:00 PM",dur:"EXAM",type:"block",title:"✦ Written Exam Starts",detail:"You've put in the work — go get it"},
+    {time:"Post-exam",dur:"–10 PM",type:"break",title:"Post-exam wind-down",detail:"Eat · rest · celebrate — you earned it"},
+    {time:"10 PM–2 AM",dur:"optional",type:"revise",title:"Optional revision (if 2nd paper)",detail:"Only if follow-up exam — otherwise skip entirely"},
+  ]},
+];
+
+const SUBJECTS=[
+  {name:"Focus Writing in English",marks:35,color:"#4ade80"},
+  {name:"Focus Writing in Bangla",marks:30,color:"#86efac"},
+  {name:"General Knowledge",marks:30,color:"#fbbf24"},
+  {name:"Comprehension",marks:20,color:"#a78bfa"},
+  {name:"Math",marks:25,color:"#fb923c"},
+  {name:"Translation (Bangla→English)",marks:20,color:"#60a5fa"},
+  {name:"Translation (English→Bangla)",marks:20,color:"#f472b6"},
+  {name:"Summary Writing",marks:20,color:"#34d399"},
+];
+
+let completedSlots=JSON.parse(localStorage.getItem('og_completed')||'[]');
+let subjectsDone=JSON.parse(localStorage.getItem('og_subjects')||'[]');
+
+function updateClock(){
+  const now=new Date();
+  document.getElementById('liveClock').textContent=now.toLocaleTimeString('en-US',{hour12:false});
+  document.getElementById('liveDate').textContent=now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+  const deadline=new Date('2026-06-07T14:00:00');
+  const diff=deadline-now;
+  if(diff<=0){document.getElementById('deadlineCountdown').textContent='EXAM TIME!';return;}
+  const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+  document.getElementById('deadlineCountdown').textContent=`${h}h ${m}m ${s}s`;
+}
+setInterval(updateClock,1000);updateClock();
+
+function buildSchedule(){
+  const cont=document.getElementById('scheduleContainer');
+  cont.innerHTML='';
+  SCHEDULE.forEach((day,di)=>{
+    const sec=document.createElement('div');
+    sec.className='day-section';
+    sec.innerHTML=`<div class="day-head-wrap"><div class="day-title">${day.day}<span></span></div><span class="day-badge">${day.badge}</span></div>`;
+    const tl=document.createElement('div');
+    day.slots.forEach((slot,si)=>{
+      const id=`${di}-${si}`;
+      const done=completedSlots.includes(id);
+      const el=document.createElement('div');
+      el.className=`slot c-${slot.type}${done?' done':''}`;
+      el.innerHTML=`
+        <div class="slot-time">${slot.time}<span class="dur">${slot.dur}</span></div>
+        <div class="slot-body">
+          <div class="slot-title">${slot.title}</div>
+          ${slot.detail?`<div class="slot-detail">${slot.detail}</div>`:''}
+        </div>
+        <div class="slot-mark" onclick="toggleSlot('${id}')">${done?'✓':'○'}</div>`;
+      tl.appendChild(el);
+    });
+    sec.appendChild(tl);
+    cont.appendChild(sec);
+  });
+}
+buildSchedule();
+
+function toggleSlot(id){
+  const idx=completedSlots.indexOf(id);
+  if(idx>-1)completedSlots.splice(idx,1);else completedSlots.push(id);
+  localStorage.setItem('og_completed',JSON.stringify(completedSlots));
+  buildSchedule();updateStats();
+  showNotif(idx>-1?'Unmarked':'Done ✓');
+}
+
+// STOPWATCH
+let swRunning=false,swStart=0,swElapsed=0,swInterval=null,swLaps=[],swSession=null;
+function fmtSW(ms){
+  const h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000),s=Math.floor((ms%60000)/1000),cs=Math.floor((ms%1000)/10);
+  if(h>0)return`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}<span class="sw-ms">.${String(cs).padStart(2,'0')}</span>`;
+  return`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}<span class="sw-ms">.${String(cs).padStart(2,'0')}</span>`;
+}
+function swToggle(){
+  if(swRunning){
+    swElapsed+=Date.now()-swStart;clearInterval(swInterval);swRunning=false;
+    document.getElementById('swStartBtn').textContent='Resume';
+    document.getElementById('swStartBtn').className='btn';
+  }else{
+    swStart=Date.now();
+    swInterval=setInterval(()=>{document.getElementById('swDisplay').innerHTML=fmtSW(swElapsed+Date.now()-swStart);},50);
+    swRunning=true;
+    document.getElementById('swStartBtn').textContent='Pause';
+    document.getElementById('swStartBtn').className='btn primary';
+  }
+}
+function swLap(){
+  if(!swRunning&&swElapsed===0)return;
+  const t=swElapsed+(swRunning?Date.now()-swStart:0);swLaps.push(t);
+  document.getElementById('lapsBox').style.display='block';
+  const prev=swLaps.length>1?swLaps[swLaps.length-2]:0;
+  document.getElementById('lapsList').innerHTML+=`<div class="lap-row"><span class="lap-n">Lap ${swLaps.length}</span><span class="lap-t">${fmtSW(t-prev).replace(/<[^>]*>/g,'')}</span><span style="color:var(--muted);font-size:0.62rem">${fmtSW(t).replace(/<[^>]*>/g,'')}</span></div>`;
+}
+function swReset(){
+  clearInterval(swInterval);swRunning=false;swStart=0;swElapsed=0;swLaps=[];
+  document.getElementById('swDisplay').innerHTML=fmtSW(0);
+  document.getElementById('swStartBtn').textContent='Start';
+  document.getElementById('swStartBtn').className='btn primary';
+  document.getElementById('lapsList').innerHTML='';
+  document.getElementById('lapsBox').style.display='none';
+}
+function buildSpGrid(){
+  const grid=document.getElementById('spGrid');grid.innerHTML='';
+  const sessions=[];
+  SCHEDULE.forEach(d=>d.slots.forEach(s=>{if(s.type!=='break'&&s.type!=='sleep'&&s.type!=='block')sessions.push(s)}));
+  sessions.forEach(s=>{
+    const el=document.createElement('div');el.className='sp-item';
+    el.innerHTML=`<div class="sp-name">${s.title}</div><div class="sp-dur">${s.dur}</div>`;
+    el.onclick=()=>{
+      document.querySelectorAll('.sp-item').forEach(x=>x.classList.remove('selected'));
+      el.classList.add('selected');swSession=s.title;
+      document.getElementById('swSessionLabel').textContent=s.title;
+    };
+    grid.appendChild(el);
+  });
+}
+buildSpGrid();
+
+// TIMER
+let timerTotal=25*60,timerLeft=25*60,timerRunning=false,timerInterval=null;
+function fmtTimer(s){return`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`}
+function updateTimerDisplay(){
+  const el=document.getElementById('timerDisplay');
+  el.textContent=fmtTimer(timerLeft);
+  el.className='timer-display'+(timerLeft<=60&&timerLeft>0?' urgent':'');
+  const pct=timerTotal>0?(timerLeft/timerTotal)*100:0;
+  document.getElementById('timerProgress').style.width=pct+'%';
+  document.getElementById('timerProgress').style.background=timerLeft<=60?'var(--coral)':'var(--amber)';
+}
+function setTimer(min){timerReset();timerTotal=min*60;timerLeft=min*60;updateTimerDisplay();}
+function setCustomTimer(){const v=parseInt(document.getElementById('customMin').value);if(v>0)setTimer(v);}
+function timerToggle(){
+  if(timerRunning){
+    clearInterval(timerInterval);timerRunning=false;
+    document.getElementById('timerStartBtn').textContent='Resume';
+    document.getElementById('timerStartBtn').className='btn';
+  }else{
+    if(timerLeft<=0){timerLeft=timerTotal;updateTimerDisplay();}
+    timerInterval=setInterval(()=>{
+      timerLeft--;updateTimerDisplay();
+      if(timerLeft<=0){clearInterval(timerInterval);timerRunning=false;document.getElementById('timerStartBtn').textContent='Start';document.getElementById('timerStartBtn').className='btn primary';showNotif('⏰ Timer done!');}
+    },1000);
+    timerRunning=true;
+    document.getElementById('timerStartBtn').textContent='Pause';
+    document.getElementById('timerStartBtn').className='btn primary';
+  }
+}
+function timerReset(){
+  clearInterval(timerInterval);timerRunning=false;timerLeft=timerTotal;
+  document.getElementById('timerStartBtn').textContent='Start';
+  document.getElementById('timerStartBtn').className='btn primary';
+  updateTimerDisplay();
+}
+updateTimerDisplay();
+
+// PROGRESS
+function updateStats(){
+  const total=SCHEDULE.reduce((a,d)=>a+d.slots.length,0);
+  const done=completedSlots.length;
+  const studySlots=SCHEDULE.reduce((a,d)=>a+d.slots.filter(s=>['study','math','revise'].includes(s.type)).length,0);
+  const studyDone=completedSlots.filter(id=>{const[di,si]=id.split('-');const s=SCHEDULE[di]?.slots[si];return s&&['study','math','revise'].includes(s.type);}).length;
+  document.getElementById('statGrid').innerHTML=`
+    <div class="stat-card"><div class="stat-label">Slots done</div><div class="stat-val">${done}/${total}</div></div>
+    <div class="stat-card"><div class="stat-label">Study blocks</div><div class="stat-val">${studyDone}/${studySlots}</div></div>
+    <div class="stat-card"><div class="stat-label">Coding</div><div class="stat-val">4×1h</div></div>
+    <div class="stat-card"><div class="stat-label">Progress</div><div class="stat-val" style="color:${done/total>0.7?'var(--accent)':'var(--amber)'}">${Math.round(done/total*100)}%</div></div>`;
+  document.getElementById('subjGrid').innerHTML=SUBJECTS.map((s,i)=>{
+    const d=subjectsDone.includes(i);
+    return`<div class="subj-row">
+      <div class="subj-top"><span class="subj-name">${s.name}</span><span class="subj-marks">${s.marks}m</span></div>
+      <div class="subj-bottom">
+        <div class="subj-bar-wrap"><div class="subj-bar" style="width:${d?100:0}%;background:${s.color}"></div></div>
+        <button class="subject-done-btn${d?' done':''}" onclick="toggleSubject(${i})">${d?'done ✓':'mark'}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function toggleSubject(i){
+  const idx=subjectsDone.indexOf(i);
+  if(idx>-1)subjectsDone.splice(idx,1);else subjectsDone.push(i);
+  localStorage.setItem('og_subjects',JSON.stringify(subjectsDone));
+  updateStats();
+}
+updateStats();
+
+function switchTab(btn,name){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='progress')updateStats();
+}
+
+let notifTimeout;
+function showNotif(msg){
+  const el=document.getElementById('notif');
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(notifTimeout);
+  notifTimeout=setTimeout(()=>el.classList.remove('show'),2200);
+}
+</script>
+</body>
+</html>
