@@ -169,7 +169,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   <div class="header">
     <div class="header-left">
       <h1>Study Planner <span>OG</span></h1>
-      <p>Written Syllabus · Jun 3 2:30 AM → Jun 6 11:00 AM</p>
+      <p>Written Syllabus · Jun 3 2:30 AM → Exam Sat Jun 7 · 2:00 PM</p>
     </div>
     <div class="live-clock">
       <div class="time" id="liveClock">00:00:00</div>
@@ -184,7 +184,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     </div>
     <div style="text-align:right">
       <div class="label">Deadline</div>
-      <div style="font-size:0.82rem;color:var(--text)">Jun 6 · 11:00 AM</div>
+      <div style="font-size:0.82rem;color:var(--text)">Sat Jun 7 · 2:00 PM (exam)</div>
     </div>
   </div>
 
@@ -293,21 +293,38 @@ const SCHEDULE = [
     {time:"10:30 PM – 1:00 AM",dur:"2.5h",type:"revise",title:"Summary Writing + Day 1&2 Revision",detail:"2 summaries · review all notes · flag weak areas"},
   ]},
   {day:"Day 3 — Thursday, Jun 5", badge:"⚠ Morning 7AM–1PM blocked", slots:[
-    {time:"1:00 – 5:00 AM",dur:"4h",type:"study",title:"Power Study — GK + Math blitz",detail:"2h GK + 2h Math lecture-record (6–8 problems)"},
-    {time:"5:00 – 7:00 AM",dur:"2h",type:"study",title:"English Writing + Comprehension",detail:"1 full essay + 1 comprehension set before block starts"},
-    {time:"7:00 AM – 1:00 PM",dur:"BLOCKED",type:"block",title:"Unavailable",detail:"No study scheduled"},
+    {time:"1:00 – 5:00 AM",dur:"4h",type:"study",title:"Power study — GK + Math blitz",detail:"2h GK (constitution, current affairs, science) + 2h Math lecture-record (6–8 problems)"},
+    {time:"5:00 – 7:00 AM",dur:"2h",type:"study",title:"English Writing + Comprehension",detail:"1 full timed essay + 1 comprehension set before block starts"},
+    {time:"7:00 AM – 1:00 PM",dur:"BLOCKED",type:"block",title:"Unavailable (morning)",detail:"No study scheduled — rest if possible"},
     {time:"1:00 – 7:00 PM",dur:"6h sleep",type:"sleep",title:"Sleep",detail:"Critical rest after heavy early session"},
     {time:"7:00 – 7:30 PM",dur:"30min",type:"break",title:"Wake up · eat · freshen",detail:""},
     {time:"7:30 – 9:30 PM",dur:"2h",type:"study",title:"Translation marathon",detail:"3 Bangla→English + 3 English→Bangla · mark every one"},
-    {time:"9:30 – 11:00 PM",dur:"1.5h",type:"study",title:"Bangla Writing — final practice",detail:"Timed 30-mark piece · intro, body, conclusion format"},
+    {time:"9:30 – 11:00 PM",dur:"1.5h",type:"study",title:"Bangla Writing — deep practice",detail:"Timed 30-mark piece · intro, body, conclusion format"},
     {time:"11:00 – 11:30 PM",dur:"30min",type:"break",title:"Dinner + rest",detail:""},
     {time:"11:30 PM – 12:30 AM",dur:"1h",type:"code",title:"Coding — hobby hour",detail:"Decompress before final revision push"},
-    {time:"12:30 – 3:00 AM",dur:"2.5h",type:"revise",title:"Comprehensive revision — all subjects",detail:"All notes · re-attempt weak problems · summary writing"},
+    {time:"12:30 – 3:00 AM",dur:"2.5h",type:"revise",title:"Comprehensive revision — all subjects",detail:"All notes · re-attempt weak problems · summary writing review"},
   ]},
-  {day:"Day 4 — Friday, Jun 6", badge:"Deadline 11:00 AM", slots:[
-    {time:"3:00 – 9:00 AM",dur:"6h sleep",type:"sleep",title:"Final sleep",detail:"Do NOT skip this — sharp mind > extra cramming"},
-    {time:"9:00 – 10:00 AM",dur:"1h",type:"revise",title:"Final revision sprint",detail:"Quick-scan all flashcards, formulas, GK notes · no new material"},
-    {time:"10:00 – 11:00 AM",dur:"1h",type:"code",title:"Coding — final hobby hour",detail:"Calm down, stay in flow state before exam window"},
+  {day:"Day 4 — Friday, Jun 6", badge:"⚠ Morning 7AM–1PM blocked", slots:[
+    {time:"3:00 – 9:00 AM",dur:"6h sleep",type:"sleep",title:"Sleep",detail:"Guard this — you need a sharp mind for the final push"},
+    {time:"9:00 AM – 1:00 PM",dur:"BLOCKED",type:"block",title:"Unavailable (morning)",detail:"No study scheduled"},
+    {time:"1:00 – 1:30 PM",dur:"30min",type:"break",title:"Wake up · eat · freshen",detail:""},
+    {time:"1:30 – 4:00 PM",dur:"2.5h",type:"study",title:"Math — final problem set",detail:"10 problems · time yourself · cover all types in syllabus"},
+    {time:"4:00 – 5:30 PM",dur:"1.5h",type:"study",title:"GK — final sprint",detail:"Flashcard rapid-fire · weak areas only · do NOT re-read everything"},
+    {time:"5:30 – 6:00 PM",dur:"30min",type:"break",title:"Break + meal",detail:""},
+    {time:"6:00 – 7:30 PM",dur:"1.5h",type:"study",title:"Both Translations — speed run",detail:"2 each direction · timed · self-mark immediately"},
+    {time:"7:30 – 8:30 PM",dur:"1h",type:"code",title:"Coding — hobby hour",detail:"Guilt-free wind-down before big day"},
+    {time:"8:30 – 10:00 PM",dur:"1.5h",type:"revise",title:"Summary Writing + full revision",detail:"2 summaries · sweep all subject notes · flag anything shaky"},
+    {time:"10:00 PM – 4:00 AM",dur:"6h sleep",type:"sleep",title:"Sleep — critical",detail:"Exam is tomorrow at 2PM · DO NOT skip this"},
+  ]},
+  {day:"Day 5 — Saturday, Jun 7", badge:"🎯 Exam day — 2:00 PM", slots:[
+    {time:"4:00 – 10:00 AM",dur:"6h sleep",type:"sleep",title:"Sleep (if not already)",detail:"Adjust if sleep was earlier — aim for 6–8h total"},
+    {time:"10:00 – 11:00 AM",dur:"1h",type:"revise",title:"Last-minute revision",detail:"Formulas, GK flashcards, key phrases — light scan only · no new material"},
+    {time:"11:00 AM – 12:00 PM",dur:"1h",type:"break",title:"Get ready · eat well · relax",detail:"No heavy studying — trust the prep"},
+    {time:"12:00 – 1:00 PM",dur:"1h",type:"revise",title:"Optional — final skim",detail:"Only if you feel anxious · 10 min per subject max · close notes by 1 PM"},
+    {time:"1:00 – 2:00 PM",dur:"1h",type:"break",title:"Travel + settle in for exam",detail:"Arrive early · water · breathe"},
+    {time:"2:00 PM",dur:"EXAM",type:"block",title:"✦ Written Exam Starts",detail:"You've put in the work — go get it"},
+    {time:"Exam → 10:00 PM",dur:"post-exam",type:"break",title:"Post-exam wind-down",detail:"Eat · rest · celebrate — you earned it"},
+    {time:"10:00 PM – 2:00 AM",dur:"optional",type:"revise",title:"Optional late revision (if 2nd paper)",detail:"Only if there's a follow-up exam — otherwise skip entirely"},
   ]},
 ];
 
@@ -332,7 +349,7 @@ function updateClock(){
   document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-US',{hour12:false});
   document.getElementById('liveDate').textContent = now.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
   // Deadline
-  const deadline = new Date('2026-06-06T11:00:00');
+  const deadline = new Date('2026-06-07T14:00:00');
   const diff = deadline - now;
   if(diff<=0){document.getElementById('deadlineCountdown').textContent='DEADLINE PASSED';return;}
   const h = Math.floor(diff/3600000);
