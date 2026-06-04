@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Written Syllabus OG — Study Planner</title>
+<title>Study Planner — Rescheduled OG • 5th June 00:45 Start</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -166,7 +166,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   <div class="header">
     <div class="header-left">
       <h1>Study Planner <span>OG</span></h1>
-      <p>Written Syllabus · Thu Jun 4 20:33 → Exam Sat Jun 6 · 14:00</p>
+      <p>Rescheduled · 5th June 00:45 start → shifted sleep 15:00–23:00 · exam Sat 6th 14:00</p>
     </div>
     <div class="live-clock">
       <div class="time" id="liveClock">00:00:00</div>
@@ -248,99 +248,106 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 </div>
 
 <script>
+// ======================= RESCHEDULED PLAN (5th June 00:45 start) =======================
+// Requirement: before sleep (15:00-23:00) complete each of the 8 subjects at least once.
+// Sleep block shifted to 15:00–23:00 (8h). Then revision from 23:00 (Jun5) until exam 14:00 (Jun6).
+
 const SCHEDULE = [
-  {day:"Session 1 — Thu Jun 4", badge:"▶ STARTS NOW 20:33 · runs to 07:00 Fri", slots:[
-    {time:"20:33–20:45",dur:"12min",type:"break",title:"Settle in · water · plan the night",detail:"Quick look at syllabus · decide what to hit hardest tonight"},
-    {time:"20:45–22:45",dur:"2h",type:"study",title:"Focus Writing in English",detail:"Study essay structure, argument flow, paragraph cohesion · write 1 full timed essay (35 marks = ~40 min) · self-mark"},
-    {time:"22:45–23:00",dur:"15min",type:"break",title:"Short break · stretch",detail:""},
-    {time:"23:00–00:30",dur:"1.5h",type:"study",title:"Focus Writing in Bangla",detail:"Formal essay/report styles · write 1 full timed piece · check intro-body-conclusion format"},
-    {time:"00:30–01:00",dur:"30min",type:"break",title:"Midnight break · snack / Fajr prep",detail:""},
-    {time:"01:00–02:30",dur:"1.5h",type:"math",title:"Math — Lecture record session",detail:"Record solutions aloud · 8–10 problems · algebra, arithmetic, percentage, ratio, profit/loss"},
-    {time:"02:30–03:30",dur:"1h",type:"study",title:"General Knowledge",detail:"Bangladesh history · constitution · science & tech · geography · int'l orgs — note cards only"},
-    {time:"03:30–03:45",dur:"15min",type:"break",title:"Break · water",detail:""},
-    {time:"03:45–04:45",dur:"1h",type:"study",title:"Comprehension",detail:"2 full timed sets · read carefully · answer all questions · self-mark"},
-    {time:"04:45–05:45",dur:"1h",type:"study",title:"Translation — Bangla → English",detail:"3 paragraphs · formal text · compare with model answers"},
-    {time:"05:45–06:30",dur:"45min",type:"study",title:"Translation — English → Bangla",detail:"3 paragraphs · idioms · official register · self-mark"},
-    {time:"06:30–07:00",dur:"30min",type:"revise",title:"Session 1 flash revision + flag weak spots",detail:"5 min per subject · note what needs more work tomorrow · then sleep"},
+  { day: "🔥 Session A — Fri Jun 5 (pre-sleep marathon)", badge: "Start 00:45 → complete all 8 subjects once before 15:00 sleep", slots: [
+    { time: "00:45–01:00", dur: "15min", type: "break", title: "Gear up · hydrate", detail: "Start exactly 00:45 · quick plan · water" },
+    { time: "01:00–02:15", dur: "1h 15min", type: "study", title: "Focus Writing in English", detail: "Essay structure, argument flow · timed write (35 marks) · self-mark strengths" },
+    { time: "02:15–02:30", dur: "15min", type: "break", title: "Stretch break", detail: "" },
+    { time: "02:30–03:45", dur: "1h 15min", type: "study", title: "Focus Writing in Bangla", detail: "Formal essay/report style · write 1 full piece · check intro-body-conclusion" },
+    { time: "03:45–04:00", dur: "15min", type: "break", title: "Snack & reflect", detail: "" },
+    { time: "04:00–05:00", dur: "1h", type: "study", title: "Comprehension", detail: "2 timed sets · read carefully, answer all · strict timing" },
+    { time: "05:00–06:00", dur: "1h", type: "study", title: "Translation (Bangla → English)", detail: "3 formal paragraphs · compare with model answers · focus on register" },
+    { time: "06:00–06:15", dur: "15min", type: "break", title: "Quick breakfast / tea", detail: "" },
+    { time: "06:15–07:15", dur: "1h", type: "study", title: "Translation (English → Bangla)", detail: "3 paragraphs including idioms · official tone · self-mark" },
+    { time: "07:15–08:15", dur: "1h", type: "study", title: "Summary Writing", detail: "2 full summaries (1/3 length) · timed each · compression mastery" },
+    { time: "08:15–08:30", dur: "15min", type: "break", title: "Walk & reset", detail: "" },
+    { time: "08:30–10:00", dur: "1h 30min", type: "math", title: "Math — complete problem set", detail: "All syllabus types: arithmetic, percentage, ratio, profit/loss, algebra · record solutions" },
+    { time: "10:00–11:30", dur: "1h 30min", type: "study", title: "General Knowledge (GK)", detail: "Bangladesh history, constitution, science, geography, int'l orgs · rapid flashcard + bullet notes" },
+    { time: "11:30–12:15", dur: "45min", type: "break", title: "Lunch & recharge", detail: "Eat full meal, rest eyes" },
+    { time: "12:15–13:15", dur: "1h", type: "revise", title: "Mixed rapid review", detail: "Scan any flagged weak spots from morning sessions · quick formulas" },
+    { time: "13:15–13:30", dur: "15min", type: "break", title: "Prepare to wrap before sleep", detail: "Pack notes, hydrate" },
+    { time: "13:30–14:45", dur: "1h 15min", type: "revise", title: "Final pre-sleep subject sweep", detail: "Re-read summaries, GK bullets, math formula sheet, translation tips" },
+    { time: "14:45–15:00", dur: "15min", type: "break", title: "Wind down · set alarm", detail: "Sleep block starts 15:00 sharp" }
   ]},
-  {day:"Sleep — Fri Jun 5", badge:"🛌 07:00–14:00 · covers 7AM–1PM block entirely", slots:[
-    {time:"07:00–14:00",dur:"7h sleep",type:"sleep",title:"Sleep — block fully covered",detail:"You're unavailable 7AM–1PM · you're asleep the whole time · zero conflict · wake 14:00"},
+  { day: "😴 Sleep Shift — Fri Jun 5", badge: "15:00 → 23:00 · 8h deep sleep (memory consolidation)", slots: [
+    { time: "15:00–23:00", dur: "8h sleep", type: "sleep", title: "Recovery & rest", detail: "Fully offline · NO alarms until 23:00 · wake up fresh" }
   ]},
-  {day:"Session 2 — Fri Jun 5", badge:"14:00 wake → runs to 07:00 Sat", slots:[
-    {time:"14:00–14:30",dur:"30min",type:"break",title:"Wake up · eat well · freshen",detail:""},
-    {time:"14:30–16:00",dur:"1.5h",type:"study",title:"Summary Writing — intensive",detail:"4 full summaries · 1/3 original length · timed · self-mark each · focus on compression"},
-    {time:"16:00–17:30",dur:"1.5h",type:"math",title:"Math — final problem set",detail:"10 problems · all syllabus types · record solutions aloud · time each one"},
-    {time:"17:30–18:00",dur:"30min",type:"break",title:"Dinner break",detail:""},
-    {time:"18:00–19:30",dur:"1.5h",type:"study",title:"GK — power blitz",detail:"Current affairs, int'l orgs, science, recent events · rapid flashcard sweep · write key bullets"},
-    {time:"19:30–21:00",dur:"1.5h",type:"study",title:"Both Translations — speed run",detail:"2 each direction · timed 20 min each · self-mark immediately · focus on tone and idioms"},
-    {time:"21:00–22:00",dur:"1h",type:"code",title:"Coding — hobby hour 🎮",detail:"Well earned · guilt-free · decompress before final push"},
-    {time:"22:00–23:00",dur:"1h",type:"study",title:"Comprehension — final drill",detail:"2 timed comprehension sets · exam simulation pace · strict time limit"},
-    {time:"23:00–23:15",dur:"15min",type:"break",title:"Break · snack",detail:""},
-    {time:"23:15–00:15",dur:"1h",type:"study",title:"Bangla Writing — final polish",detail:"Re-write 1 timed piece · focus on marks-heavy intro and conclusion"},
-    {time:"00:15–01:15",dur:"1h",type:"study",title:"English Writing — final polish",detail:"Re-write 1 timed essay · argument structure · transitions · concluding paragraph"},
-    {time:"01:15–01:30",dur:"15min",type:"break",title:"Break · water",detail:""},
-    {time:"01:30–03:00",dur:"1.5h",type:"revise",title:"Comprehensive revision — all 8 subjects",detail:"Sweep every subject · note cards · re-read all summaries written · flag anything shaky"},
-    {time:"03:00–04:00",dur:"1h",type:"revise",title:"Math + GK deep revision",detail:"Re-attempt any flagged problems · GK bullet points rapid recall · formulas sheet"},
-    {time:"04:00–04:30",dur:"30min",type:"revise",title:"Pre-sleep flash review — close all notes",detail:"5 min per subject max · formulas · GK bullets · writing tips · put notes away"},
-    {time:"04:30–07:00",dur:"2.5h sleep",type:"sleep",title:"Short sleep — set alarm 07:00",detail:"2.5h is enough to consolidate memory · DO NOT skip"},
+  { day: "⚡ Revision Phase — Fri Jun 5 23:00 → Sat Jun 6 14:00", badge: "Full revision sprint: all subjects covered multiple times · exam day prep", slots: [
+    { time: "23:00–23:30", dur: "30min", type: "break", title: "Wake up, freshen, light snack", detail: "Glass of water, coffee/tea if needed" },
+    { time: "23:30–00:30", dur: "1h", type: "revise", title: "English Writing last polish", detail: "Re-read best essay, memorize transitions, paragraph hooks" },
+    { time: "00:30–01:30", dur: "1h", type: "revise", title: "Bangla Writing final glance", detail: "Strong intro/conclusion patterns · 15 min timed outline" },
+    { time: "01:30–02:00", dur: "30min", type: "revise", title: "Comprehension speed run", detail: "2 quick passages, mental answers only" },
+    { time: "02:00–02:30", dur: "30min", type: "break", title: "Short break", detail: "Walk + water" },
+    { time: "02:30–03:30", dur: "1h", type: "revise", title: "Math formula & problem replay", detail: "Re-attempt 5 key problems · formula sheet active recall" },
+    { time: "03:30–04:30", dur: "1h", type: "revise", title: "GK rapid fire", detail: "Flashcards + current affairs · write down 30 key facts" },
+    { time: "04:30–05:15", dur: "45min", type: "revise", title: "Translations (both directions)", detail: "Compare original errors · focus on tricky idioms" },
+    { time: "05:15–05:45", dur: "30min", type: "revise", title: "Summary Writing drill", detail: "Write 1 short summary under 20 min · check conciseness" },
+    { time: "05:45–06:30", dur: "45min", type: "break", title: "Breakfast & mental reset", detail: "Eat well, light walk, no notes" },
+    { time: "06:30–07:30", dur: "1h", type: "revise", title: "Cross-subject integration", detail: "Link writing techniques & GK facts — exam strategy" },
+    { time: "07:30–08:30", dur: "1h", type: "revise", title: "Mock micro-exam (all subjects)", detail: "5 min per subject quick-fire recall · no notes" },
+    { time: "08:30–09:30", dur: "1h", type: "break", title: "Long break · relax · shower", detail: "Calm mind, trust preparation" },
+    { time: "09:30–10:30", dur: "1h", type: "revise", title: "Passive review / flashcards", detail: "Scan mistakes from earlier, highlight safe zone" },
+    { time: "10:30–11:15", dur: "45min", type: "revise", title: "Light GK + Math mental walkthrough", detail: "No writing · just visualize formulas & events" },
+    { time: "11:15–12:00", dur: "45min", type: "break", title: "Prepare for exam departure", detail: "Get dressed, bag ready, eat light meal" },
+    { time: "12:00–13:00", dur: "1h", type: "break", title: "Travel & arrive early", detail: "Leave home by 12:00 · settle at venue" },
+    { time: "13:00–14:00", dur: "1h", type: "revise", title: "Silent calm revision (optional)", detail: "Only mental run-through · deep breaths · no new material" }
   ]},
-  {day:"Exam Day — Sat Jun 6", badge:"🎯 EXAM 14:00 · last revision window open until 14:00", slots:[
-    {time:"07:00–09:00",dur:"2h sleep",type:"sleep",title:"Top-up sleep if needed",detail:"If you woke at 7 go back to sleep · aim for 4–5h total · alarm no later than 09:00"},
-    {time:"09:00–10:00",dur:"1h",type:"revise",title:"Last-minute revision — light scan only",detail:"GK flashcards · Math formulas · essay structure tips · NO new material whatsoever"},
-    {time:"10:00–11:00",dur:"1h",type:"break",title:"Get ready · eat a full meal · relax",detail:"Fresh clothes · good breakfast · calm music · trust every hour you put in"},
-    {time:"11:00–12:00",dur:"1h",type:"revise",title:"Optional calm skim",detail:"Only if anxious · 10 min per subject max · mental walkthrough only · close notes by 12:00"},
-    {time:"12:00–13:00",dur:"1h",type:"break",title:"Travel · arrive early · settle in",detail:"Leave home by 12:00 latest · water · breathe · you're ready"},
-    {time:"13:00–14:00",dur:"1h",type:"revise",title:"Final optional revision up to 14:00",detail:"Sit quietly · mental run-through only · no new reading · calm your mind"},
-    {time:"14:00",dur:"EXAM",type:"block",title:"✦ Written Exam — OG",detail:"You've compressed every hour into this · go get it 🔥"},
-  ]},
+  { day: "🎯 EXAM DAY — Sat Jun 6", badge: "14:00 FINAL · you've prepared every hour", slots: [
+    { time: "14:00", dur: "EXAM", type: "block", title: "✦ WRITTEN EXAM — OG ✦", detail: "Trust your revision · all 8 subjects covered · you are ready 🔥" }
+  ]}
 ];
 
-const SUBJECTS=[
-  {name:"Focus Writing in English",marks:35,color:"#4ade80"},
-  {name:"Focus Writing in Bangla",marks:30,color:"#86efac"},
-  {name:"General Knowledge",marks:30,color:"#fbbf24"},
-  {name:"Comprehension",marks:20,color:"#a78bfa"},
-  {name:"Math",marks:25,color:"#fb923c"},
-  {name:"Translation (Bangla→English)",marks:20,color:"#60a5fa"},
-  {name:"Translation (English→Bangla)",marks:20,color:"#f472b6"},
-  {name:"Summary Writing",marks:20,color:"#34d399"},
+// Subjects exactly as in OG (marks consistent)
+const SUBJECTS = [
+  { name: "Focus Writing in English", marks: 35, color: "#4ade80" },
+  { name: "Focus Writing in Bangla", marks: 30, color: "#86efac" },
+  { name: "General Knowledge", marks: 30, color: "#fbbf24" },
+  { name: "Comprehension", marks: 20, color: "#a78bfa" },
+  { name: "Math", marks: 25, color: "#fb923c" },
+  { name: "Translation (Bangla→English)", marks: 20, color: "#60a5fa" },
+  { name: "Translation (English→Bangla)", marks: 20, color: "#f472b6" },
+  { name: "Summary Writing", marks: 20, color: "#34d399" }
 ];
 
-let completedSlots=JSON.parse(localStorage.getItem('og_completed')||'[]');
-let subjectsDone=JSON.parse(localStorage.getItem('og_subjects')||'[]');
+let completedSlots = JSON.parse(localStorage.getItem('og_completed') || '[]');
+let subjectsDone = JSON.parse(localStorage.getItem('og_subjects') || '[]');
 
-function updateClock(){
-  const now=new Date();
-  document.getElementById('liveClock').textContent=now.toLocaleTimeString('en-US',{hour12:false});
-  document.getElementById('liveDate').textContent=now.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-  const deadline=new Date('2026-06-06T14:00:00');
-  const diff=deadline-now;
-  if(diff<=0){document.getElementById('deadlineCountdown').textContent='EXAM TIME!';return;}
-  const h=Math.floor(diff/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
-  document.getElementById('deadlineCountdown').textContent=`${h}h ${m}m ${s}s`;
+function updateClock() {
+  const now = new Date();
+  document.getElementById('liveClock').textContent = now.toLocaleTimeString('en-US', { hour12: false });
+  document.getElementById('liveDate').textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  const deadline = new Date('2026-06-06T14:00:00');
+  const diff = deadline - now;
+  if (diff <= 0) { document.getElementById('deadlineCountdown').textContent = 'EXAM TIME!'; return; }
+  const h = Math.floor(diff / 3600000), m = Math.floor((diff % 3600000) / 60000), s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('deadlineCountdown').textContent = `${h}h ${m}m ${s}s`;
 }
-setInterval(updateClock,1000);updateClock();
+setInterval(updateClock, 1000); updateClock();
 
-function buildSchedule(){
-  const cont=document.getElementById('scheduleContainer');
-  cont.innerHTML='';
-  SCHEDULE.forEach((day,di)=>{
-    const sec=document.createElement('div');
-    sec.className='day-section';
-    sec.innerHTML=`<div class="day-head-wrap"><div class="day-title">${day.day}<span></span></div><span class="day-badge">${day.badge}</span></div>`;
-    const tl=document.createElement('div');
-    day.slots.forEach((slot,si)=>{
-      const id=`${di}-${si}`;
-      const done=completedSlots.includes(id);
-      const el=document.createElement('div');
-      el.className=`slot c-${slot.type}${done?' done':''}`;
-      el.innerHTML=`
+function buildSchedule() {
+  const cont = document.getElementById('scheduleContainer');
+  cont.innerHTML = '';
+  SCHEDULE.forEach((day, di) => {
+    const sec = document.createElement('div');
+    sec.className = 'day-section';
+    sec.innerHTML = `<div class="day-head-wrap"><div class="day-title">${day.day}<span></span></div><span class="day-badge">${day.badge}</span></div>`;
+    const tl = document.createElement('div');
+    day.slots.forEach((slot, si) => {
+      const id = `${di}-${si}`;
+      const done = completedSlots.includes(id);
+      const el = document.createElement('div');
+      el.className = `slot c-${slot.type}${done ? ' done' : ''}`;
+      el.innerHTML = `
         <div class="slot-time">${slot.time}<span class="dur">${slot.dur}</span></div>
         <div class="slot-body">
           <div class="slot-title">${slot.title}</div>
-          ${slot.detail?`<div class="slot-detail">${slot.detail}</div>`:''}
+          ${slot.detail ? `<div class="slot-detail">${slot.detail}</div>` : ''}
         </div>
-        <div class="slot-mark" onclick="toggleSlot('${id}')">${done?'✓':'○'}</div>`;
+        <div class="slot-mark" onclick="toggleSlot('${id}')">${done ? '✓' : '○'}</div>`;
       tl.appendChild(el);
     });
     sec.appendChild(tl);
@@ -349,60 +356,62 @@ function buildSchedule(){
 }
 buildSchedule();
 
-function toggleSlot(id){
-  const idx=completedSlots.indexOf(id);
-  if(idx>-1)completedSlots.splice(idx,1);else completedSlots.push(id);
-  localStorage.setItem('og_completed',JSON.stringify(completedSlots));
-  buildSchedule();updateStats();
-  showNotif(idx>-1?'Unmarked':'Done ✓');
+function toggleSlot(id) {
+  const idx = completedSlots.indexOf(id);
+  if (idx > -1) completedSlots.splice(idx, 1);
+  else completedSlots.push(id);
+  localStorage.setItem('og_completed', JSON.stringify(completedSlots));
+  buildSchedule();
+  updateStats();
+  showNotif(idx > -1 ? 'Unmarked' : 'Done ✓');
 }
 
 // STOPWATCH
-let swRunning=false,swStart=0,swElapsed=0,swInterval=null,swLaps=[],swSession=null;
-function fmtSW(ms){
-  const h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000),s=Math.floor((ms%60000)/1000),cs=Math.floor((ms%1000)/10);
-  if(h>0)return`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}<span class="sw-ms">.${String(cs).padStart(2,'0')}</span>`;
-  return`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}<span class="sw-ms">.${String(cs).padStart(2,'0')}</span>`;
+let swRunning = false, swStart = 0, swElapsed = 0, swInterval = null, swLaps = [], swSession = null;
+function fmtSW(ms) {
+  const h = Math.floor(ms / 3600000), m = Math.floor((ms % 3600000) / 60000), s = Math.floor((ms % 60000) / 1000), cs = Math.floor((ms % 1000) / 10);
+  if (h > 0) return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}<span class="sw-ms">.${String(cs).padStart(2, '0')}</span>`;
+  return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}<span class="sw-ms">.${String(cs).padStart(2, '0')}</span>`;
 }
-function swToggle(){
-  if(swRunning){
-    swElapsed+=Date.now()-swStart;clearInterval(swInterval);swRunning=false;
-    document.getElementById('swStartBtn').textContent='Resume';
-    document.getElementById('swStartBtn').className='btn';
-  }else{
-    swStart=Date.now();
-    swInterval=setInterval(()=>{document.getElementById('swDisplay').innerHTML=fmtSW(swElapsed+Date.now()-swStart);},50);
-    swRunning=true;
-    document.getElementById('swStartBtn').textContent='Pause';
-    document.getElementById('swStartBtn').className='btn primary';
+function swToggle() {
+  if (swRunning) {
+    swElapsed += Date.now() - swStart; clearInterval(swInterval); swRunning = false;
+    document.getElementById('swStartBtn').textContent = 'Resume';
+    document.getElementById('swStartBtn').className = 'btn';
+  } else {
+    swStart = Date.now();
+    swInterval = setInterval(() => { document.getElementById('swDisplay').innerHTML = fmtSW(swElapsed + Date.now() - swStart); }, 50);
+    swRunning = true;
+    document.getElementById('swStartBtn').textContent = 'Pause';
+    document.getElementById('swStartBtn').className = 'btn primary';
   }
 }
-function swLap(){
-  if(!swRunning&&swElapsed===0)return;
-  const t=swElapsed+(swRunning?Date.now()-swStart:0);swLaps.push(t);
-  document.getElementById('lapsBox').style.display='block';
-  const prev=swLaps.length>1?swLaps[swLaps.length-2]:0;
-  document.getElementById('lapsList').innerHTML+=`<div class="lap-row"><span class="lap-n">Lap ${swLaps.length}</span><span class="lap-t">${fmtSW(t-prev).replace(/<[^>]*>/g,'')}</span><span style="color:var(--muted);font-size:0.62rem">${fmtSW(t).replace(/<[^>]*>/g,'')}</span></div>`;
+function swLap() {
+  if (!swRunning && swElapsed === 0) return;
+  const t = swElapsed + (swRunning ? Date.now() - swStart : 0); swLaps.push(t);
+  document.getElementById('lapsBox').style.display = 'block';
+  const prev = swLaps.length > 1 ? swLaps[swLaps.length - 2] : 0;
+  document.getElementById('lapsList').innerHTML += `<div class="lap-row"><span class="lap-n">Lap ${swLaps.length}</span><span class="lap-t">${fmtSW(t - prev).replace(/<[^>]*>/g, '')}</span><span style="color:var(--muted);font-size:0.62rem">${fmtSW(t).replace(/<[^>]*>/g, '')}</span></div>`;
 }
-function swReset(){
-  clearInterval(swInterval);swRunning=false;swStart=0;swElapsed=0;swLaps=[];
-  document.getElementById('swDisplay').innerHTML=fmtSW(0);
-  document.getElementById('swStartBtn').textContent='Start';
-  document.getElementById('swStartBtn').className='btn primary';
-  document.getElementById('lapsList').innerHTML='';
-  document.getElementById('lapsBox').style.display='none';
+function swReset() {
+  clearInterval(swInterval); swRunning = false; swStart = 0; swElapsed = 0; swLaps = [];
+  document.getElementById('swDisplay').innerHTML = fmtSW(0);
+  document.getElementById('swStartBtn').textContent = 'Start';
+  document.getElementById('swStartBtn').className = 'btn primary';
+  document.getElementById('lapsList').innerHTML = '';
+  document.getElementById('lapsBox').style.display = 'none';
 }
-function buildSpGrid(){
-  const grid=document.getElementById('spGrid');grid.innerHTML='';
-  const sessions=[];
-  SCHEDULE.forEach(d=>d.slots.forEach(s=>{if(s.type!=='break'&&s.type!=='sleep'&&s.type!=='block')sessions.push(s)}));
-  sessions.forEach(s=>{
-    const el=document.createElement('div');el.className='sp-item';
-    el.innerHTML=`<div class="sp-name">${s.title}</div><div class="sp-dur">${s.dur}</div>`;
-    el.onclick=()=>{
-      document.querySelectorAll('.sp-item').forEach(x=>x.classList.remove('selected'));
-      el.classList.add('selected');swSession=s.title;
-      document.getElementById('swSessionLabel').textContent=s.title;
+function buildSpGrid() {
+  const grid = document.getElementById('spGrid'); grid.innerHTML = '';
+  const sessions = [];
+  SCHEDULE.forEach(d => d.slots.forEach(s => { if (s.type !== 'break' && s.type !== 'sleep' && s.type !== 'block') sessions.push(s); }));
+  sessions.forEach(s => {
+    const el = document.createElement('div'); el.className = 'sp-item';
+    el.innerHTML = `<div class="sp-name">${s.title}</div><div class="sp-dur">${s.dur}</div>`;
+    el.onclick = () => {
+      document.querySelectorAll('.sp-item').forEach(x => x.classList.remove('selected'));
+      el.classList.add('selected'); swSession = s.title;
+      document.getElementById('swSessionLabel').textContent = s.title;
     };
     grid.appendChild(el);
   });
@@ -410,86 +419,82 @@ function buildSpGrid(){
 buildSpGrid();
 
 // TIMER
-let timerTotal=25*60,timerLeft=25*60,timerRunning=false,timerInterval=null;
-function fmtTimer(s){return`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`}
-function updateTimerDisplay(){
-  const el=document.getElementById('timerDisplay');
-  el.textContent=fmtTimer(timerLeft);
-  el.className='timer-display'+(timerLeft<=60&&timerLeft>0?' urgent':'');
-  const pct=timerTotal>0?(timerLeft/timerTotal)*100:0;
-  document.getElementById('timerProgress').style.width=pct+'%';
-  document.getElementById('timerProgress').style.background=timerLeft<=60?'var(--coral)':'var(--amber)';
+let timerTotal = 25 * 60, timerLeft = 25 * 60, timerRunning = false, timerInterval = null;
+function fmtTimer(s) { return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; }
+function updateTimerDisplay() {
+  const el = document.getElementById('timerDisplay');
+  el.textContent = fmtTimer(timerLeft);
+  el.className = 'timer-display' + (timerLeft <= 60 && timerLeft > 0 ? ' urgent' : '');
+  const pct = timerTotal > 0 ? (timerLeft / timerTotal) * 100 : 0;
+  document.getElementById('timerProgress').style.width = pct + '%';
+  document.getElementById('timerProgress').style.background = timerLeft <= 60 ? 'var(--coral)' : 'var(--amber)';
 }
-function setTimer(min){timerReset();timerTotal=min*60;timerLeft=min*60;updateTimerDisplay();}
-function setCustomTimer(){const v=parseInt(document.getElementById('customMin').value);if(v>0)setTimer(v);}
-function timerToggle(){
-  if(timerRunning){
-    clearInterval(timerInterval);timerRunning=false;
-    document.getElementById('timerStartBtn').textContent='Resume';
-    document.getElementById('timerStartBtn').className='btn';
-  }else{
-    if(timerLeft<=0){timerLeft=timerTotal;updateTimerDisplay();}
-    timerInterval=setInterval(()=>{
-      timerLeft--;updateTimerDisplay();
-      if(timerLeft<=0){clearInterval(timerInterval);timerRunning=false;document.getElementById('timerStartBtn').textContent='Start';document.getElementById('timerStartBtn').className='btn primary';showNotif('⏰ Timer done!');}
-    },1000);
-    timerRunning=true;
-    document.getElementById('timerStartBtn').textContent='Pause';
-    document.getElementById('timerStartBtn').className='btn primary';
+function setTimer(min) { timerReset(); timerTotal = min * 60; timerLeft = min * 60; updateTimerDisplay(); }
+function setCustomTimer() { const v = parseInt(document.getElementById('customMin').value); if (v > 0) setTimer(v); }
+function timerToggle() {
+  if (timerRunning) {
+    clearInterval(timerInterval); timerRunning = false;
+    document.getElementById('timerStartBtn').textContent = 'Resume';
+    document.getElementById('timerStartBtn').className = 'btn';
+  } else {
+    if (timerLeft <= 0) { timerLeft = timerTotal; updateTimerDisplay(); }
+    timerInterval = setInterval(() => {
+      timerLeft--; updateTimerDisplay();
+      if (timerLeft <= 0) { clearInterval(timerInterval); timerRunning = false; document.getElementById('timerStartBtn').textContent = 'Start'; document.getElementById('timerStartBtn').className = 'btn primary'; showNotif('⏰ Timer done!'); }
+    }, 1000);
+    timerRunning = true;
+    document.getElementById('timerStartBtn').textContent = 'Pause';
+    document.getElementById('timerStartBtn').className = 'btn primary';
   }
 }
-function timerReset(){
-  clearInterval(timerInterval);timerRunning=false;timerLeft=timerTotal;
-  document.getElementById('timerStartBtn').textContent='Start';
-  document.getElementById('timerStartBtn').className='btn primary';
-  updateTimerDisplay();
-}
+function timerReset() { clearInterval(timerInterval); timerRunning = false; timerLeft = timerTotal; document.getElementById('timerStartBtn').textContent = 'Start'; document.getElementById('timerStartBtn').className = 'btn primary'; updateTimerDisplay(); }
 updateTimerDisplay();
 
 // PROGRESS
-function updateStats(){
-  const total=SCHEDULE.reduce((a,d)=>a+d.slots.length,0);
-  const done=completedSlots.length;
-  const studySlots=SCHEDULE.reduce((a,d)=>a+d.slots.filter(s=>['study','math','revise'].includes(s.type)).length,0);
-  const studyDone=completedSlots.filter(id=>{const[di,si]=id.split('-');const s=SCHEDULE[di]?.slots[si];return s&&['study','math','revise'].includes(s.type);}).length;
-  document.getElementById('statGrid').innerHTML=`
+function updateStats() {
+  const total = SCHEDULE.reduce((a, d) => a + d.slots.length, 0);
+  const done = completedSlots.length;
+  const studySlots = SCHEDULE.reduce((a, d) => a + d.slots.filter(s => ['study', 'math', 'revise'].includes(s.type)).length, 0);
+  const studyDone = completedSlots.filter(id => { const [di, si] = id.split('-'); const s = SCHEDULE[di]?.slots[si]; return s && ['study', 'math', 'revise'].includes(s.type); }).length;
+  document.getElementById('statGrid').innerHTML = `
     <div class="stat-card"><div class="stat-label">Slots done</div><div class="stat-val">${done}/${total}</div></div>
     <div class="stat-card"><div class="stat-label">Study blocks</div><div class="stat-val">${studyDone}/${studySlots}</div></div>
-    <div class="stat-card"><div class="stat-label">Coding</div><div class="stat-val">1×1h</div></div>
-    <div class="stat-card"><div class="stat-label">Progress</div><div class="stat-val" style="color:${done/total>0.7?'var(--accent)':'var(--amber)'}">${Math.round(done/total*100)}%</div></div>`;
-  document.getElementById('subjGrid').innerHTML=SUBJECTS.map((s,i)=>{
-    const d=subjectsDone.includes(i);
-    return`<div class="subj-row">
+    <div class="stat-card"><div class="stat-label">All subjects</div><div class="stat-val">${subjectsDone.length}/8</div></div>
+    <div class="stat-card"><div class="stat-label">Progress</div><div class="stat-val" style="color:${done / total > 0.7 ? 'var(--accent)' : 'var(--amber)'}">${Math.round(done / total * 100)}%</div></div>`;
+  document.getElementById('subjGrid').innerHTML = SUBJECTS.map((s, i) => {
+    const d = subjectsDone.includes(i);
+    return `<div class="subj-row">
       <div class="subj-top"><span class="subj-name">${s.name}</span><span class="subj-marks">${s.marks}m</span></div>
       <div class="subj-bottom">
-        <div class="subj-bar-wrap"><div class="subj-bar" style="width:${d?100:0}%;background:${s.color}"></div></div>
-        <button class="subject-done-btn${d?' done':''}" onclick="toggleSubject(${i})">${d?'done ✓':'mark'}</button>
+        <div class="subj-bar-wrap"><div class="subj-bar" style="width:${d ? 100 : 0}%;background:${s.color}"></div></div>
+        <button class="subject-done-btn${d ? ' done' : ''}" onclick="toggleSubject(${i})">${d ? 'done ✓' : 'mark'}</button>
       </div>
     </div>`;
   }).join('');
 }
-function toggleSubject(i){
-  const idx=subjectsDone.indexOf(i);
-  if(idx>-1)subjectsDone.splice(idx,1);else subjectsDone.push(i);
-  localStorage.setItem('og_subjects',JSON.stringify(subjectsDone));
+function toggleSubject(i) {
+  const idx = subjectsDone.indexOf(i);
+  if (idx > -1) subjectsDone.splice(idx, 1); else subjectsDone.push(i);
+  localStorage.setItem('og_subjects', JSON.stringify(subjectsDone));
   updateStats();
+  showNotif(subjectsDone.includes(i) ? `✔️ ${SUBJECTS[i].name} completed` : `❌ ${SUBJECTS[i].name} unmarked`);
 }
 updateStats();
 
-function switchTab(btn,name){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('panel-'+name).classList.add('active');
+function switchTab(btn, name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
   btn.classList.add('active');
-  if(name==='progress')updateStats();
+  if (name === 'progress') updateStats();
 }
 
 let notifTimeout;
-function showNotif(msg){
-  const el=document.getElementById('notif');
-  el.textContent=msg;el.classList.add('show');
+function showNotif(msg) {
+  const el = document.getElementById('notif');
+  el.textContent = msg; el.classList.add('show');
   clearTimeout(notifTimeout);
-  notifTimeout=setTimeout(()=>el.classList.remove('show'),2200);
+  notifTimeout = setTimeout(() => el.classList.remove('show'), 2200);
 }
 </script>
 </body>
